@@ -1,0 +1,38 @@
+{% extends 'adminbase.html' %}
+{% load static %}
+{% block title %} All Data {% endblock %}
+{% block content %}
+<main id="main" class="main">      
+    <div class="input-group">
+        <input type="text" class="form-control" aria-label="Text input with radio button" placeholder="Search....">
+    </div>
+    <table class="table table-success table-striped">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Package</th>
+                <th scope="col">Email</th>
+                <th scope="col">Delete</th>
+                <th scope="col">View</th>
+                <th scope="col">Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in alldata %}
+            <tr>
+                <th scope="row">{{i.id}}</th>
+                <td>{{i.leader_name}}</td>
+                <td>{{i.leader_contact_number}}</td>
+                <td>{{i.package}}</td>
+                <td>{{i.leader_email}}</td>
+                <td><i class="bi bi-trash"></i></td>
+                <td><i class="bi bi-eye"></i></td>
+                <td><i class="bi bi-pencil-square"></i></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</main>
+{% endblock %}

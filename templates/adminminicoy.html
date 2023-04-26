@@ -1,0 +1,169 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>minicoy admin</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+  <link href="{% static 'img/navlogo.jpg' %}" rel="icon">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+</head>
+<body>
+<header id="header" class="header fixed-top d-flex align-items-center">
+    <div class="d-flex align-items-center justify-content-between">
+        <a href="{% url 'minicoy' %}" class="logo d-flex align-items-center">
+            <img src="{% static 'img/navlogo.jpg' %}" alt="">
+            <span class="d-none d-lg-block">Minicoy Admin</span>
+        </a>
+        <i class="bi bi-list toggle-sidebar-btn"></i>
+    </div>
+    <nav class="header-nav ms-auto">
+        <ul class="d-flex align-items-center">
+            <li class="nav-item dropdown pe-3">
+                <a class="nav-link nav-profile d-flex align-items-center pe-0" href="error.html" data-bs-toggle="dropdown">
+                    <img src="{% static 'img/navlogo.jpg' %}" alt="Profile" class="rounded-circle">
+                    <span class="d-none d-md-block dropdown-toggle ps-2">{{user}}</span>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+                    <li class="dropdown-header">
+                        <h6>{{user}}</h6>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center" href="{% url 'logoutminicoy' %}">
+                            <i class="bi bi-box-arrow-right"></i>
+                            <span>Sign Out</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+</header>
+<aside id="sidebar" class="sidebar">
+    <ul class="sidebar-nav" id="sidebar-nav"> 
+        <li class="nav-item">
+            <a class="nav-link " href="{% url 'minicoy' %}">
+                <span>Dashboard</span>
+            </a>
+        </li>
+    </ul>
+</aside>  
+<main id="main" class="main">
+    <!-- {% if messages %}
+    {% for i in messages %}
+    <div class="alert alert-success bg-success text-light border-0 alert-dismissible fade show" role="alert">
+         {{i}}
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+    {% endif %} -->
+    <div class="card"> 
+        <div class="card-body">
+            <div class="table-responsive">
+                <br>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col">
+                            <div class="input-group">
+                                <div class="form-outline">
+                                    <input id="search" type="text" class="form-control" placeholder="Search...." />
+                                </div>                  
+                            </div>
+                        </div>                   
+                    </div>  
+                </form>                 
+                <table class="table table-bordered table-hover" id="myTable">
+                    <br>
+                    <thead >
+                        <tr class="table-primary" id="chk-th">
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>contact</th>
+                            <th>Package</th>
+                            <th>Status</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>                                     
+                        {% for i in minicoy_island reversed %}
+                            {% if i.island == 'Minicoy' %}        
+                            <tr>
+                                <td>{{i.id}}</td>
+                                <td>{{i.leader_name}}</td>
+                                <td>{{i.leader_contact_number}}</td>
+                                <td>{{i.package}}</td>
+                                {% if i.status == 'Processing' %}
+                                <td class="text-warning"><strong>{{i.status}}</strong></td>
+                                {% elif i.status == 'open' %}
+                                <td class="text-success"><strong>{{i.status}}</strong></td>
+                                {% elif i.status == 'Confirm' %}
+                                <td class="text-primary"><strong>{{i.status}}</strong></td>
+                                {% else %}
+                                <td class="text-danger"><strong>{{i.status}}</strong></td>
+                                {% endif %}
+                                <td><a href="{% url 'leader_details_mincoy' i.id %}" class="btn btn-sm btn-primary">Detail</a></td>
+                            </tr>
+                            {% else %}                        
+                            {% endif %}
+                        {% endfor %}  
+                    </tbody>
+                </table>
+                <span class="text-danger" id="no-data"></span>
+            </div>
+        </div>
+    </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<style>
+    @media (max-width: 480px) {
+        .emty{
+            color: rgb(48, 12, 12);
+            left: 20px;
+            position: relative;
+        }
+  }
+</style>
+<script>
+$(document).ready(function(){
+    $("#search").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#myTable tbody tr").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+        if($("#myTable tbody tr:visible").length == 0){
+            $("#no-data").html("No data found");
+        }else{
+            $("#no-data").html("");
+        }
+    });
+});
+</script>
+</main>
+<body>
+  <script src="{% static 'assets/vendor/apexcharts/apexcharts.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/chart.js/chart.umd.js' %}"></script>
+  <script src="{% static 'assets/vendor/echarts/echarts.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/quill/quill.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/simple-datatables/simple-datatables.js' %}"></script>
+  <script src="{% static 'assets/vendor/tinymce/tinymce.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+  <script src="{% static 'assets/js/main.js' %}"></script>
+</body>
+</html>

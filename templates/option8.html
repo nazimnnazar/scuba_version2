@@ -1,0 +1,617 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} 8 Form  {% endblock %}
+{% block content %}
+{% if messages %}
+    {% for message in messages %}
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script>
+            var m = "    {{ message }}"
+            swal("Good job!",m);
+        </script>
+    {% endfor %}
+{% endif %}
+<div class="container">
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="col-md-auto">
+                    <h5>Which island do you wish to do your <strong>SCUBA</strong></h5>
+                </div>
+            </div>
+            <br>
+            <select class="form-select" name="island"  aria-label="Default select example">
+                <option value="selected">Select Island</option>
+                <option value="Kavaratti">1 Kavaratti</option>
+                <option value="Agatti">2 Agatti</option>
+                <option value="Kadmat">3 Kadmat</option>
+                <option value="Minicoy">4 Minicoy</option>
+                <option value="Kalpeni">5 Kalpeni</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Name:</label>
+            <input type="text" name="leader_name" required >
+        </div> 
+
+        <div class="form-group">
+            <label >Father Name:</label>
+            <input type="text"  name="leader_father_name" required >
+        </div>
+        
+        <div class="form-group">
+            <label >Contact Number:</label>
+            <input type="tel"  name="leader_contact_number" required >
+        </div>
+        
+        <div class="form-group">
+            <label >Email:</label>
+            <input type="email"  name="leader_email" required >
+        </div>
+        
+        <div class="form-group">
+            <label >Address:</label>
+            <textarea id="address" name="leader_address" required></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label >Date of Birth:</label>
+            <input type="date"  name="leader_date_of_birth" required >
+        </div>
+
+        <div class="form-group">
+            <label>Emergency Contact Person:</label>
+            <input type="text"  name="leader_emergency_contact_person" required>
+        </div>
+
+        <div class="form-group">
+            <label >Emergency Contact Number:</label>
+            <input type="tel"  name="leader_emergency_contact_number" required>
+        </div> 
+        <div class="form-group">
+            <label>Photo (PDF)</label>
+            <input type="file"  name="leader_photo" accept=".pdf"  required>
+        </div>
+
+        <div class="form-group">
+            <label>ID Aadhar (PDF):</label>
+            <input type="file"  name="leader_id_adhaar" accept=".pdf" required>
+        </div>
+        
+        <div class="form-group">
+            <label >Police clearance (PDF):</label>
+            <input type="file" name="leader_id_PCC" accept=".pdf" required>
+        </div>
+        <br>
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="col col-lg-2"></div>
+                <div class="col-md-auto">
+                    <h5>Form2</h5>
+                </div>
+                <div class="col col-lg-2"></div>
+            </div>
+        </div>
+        <!-- form2 -->
+        {% csrf_token %}
+        <div class="form-group">
+            <label >Name:</label>
+            <input type="text"  name="member_name" required >
+        </div> 
+
+        <div class="form-group">
+            <label >Father Name:</label>
+            <input type="text" name="member_father_name" required >
+        </div>
+        
+        <div class="form-group">
+            <label>Contact Number:</label>
+            <input type="tel" name="member_contact_number" required >
+        </div>
+        
+        <div class="form-group">
+            <label >Email:</label>
+            <input type="email"  name="member_email" required >
+        </div>
+        
+        <div class="form-group">
+            <label >Address:</label>
+            <textarea  name="member_address" required></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label >Date of Birth:</label>
+            <input type="date" name="member_date_of_birth" required >
+        </div>
+
+        <div class="form-group">
+            <label >Emergency Contact Person:</label>
+            <input type="text"  name="member_emergency_contact_person" required>
+        </div>
+
+        <div class="form-group">
+            <label >Emergency Contact Number:</label>
+            <input type="tel"  name="member_emergency_contact_number" required>
+        </div> 
+
+       <div class="form-group">
+            <label>Photo (PDF)</label>
+            <input type="file" name="member_photo" accept=".pdf"  required>
+        </div>
+
+        <div class="form-group">
+            <label >ID Aadhar (PDF):</label>
+            <input type="file" name="member_id_proof" accept=".pdf" required>
+        </div>
+        
+        <div class="form-group">
+            <label >Police clearance (PDF):</label>
+            <input type="file" name="member_id_proof_again" accept=".pdf" required>
+        </div>
+        <!-- Form 3 -->
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="col col-lg-2"></div>
+                <div class="col-md-auto">
+                    <h5>Form3</h5>
+                </div>
+                <div class="col col-lg-2"></div>
+            </div>
+        </div>
+        {% csrf_token %}
+        <div class="form-group">
+            <label >Name:</label>
+            <input type="text"  name="member2_name" required >
+        </div> 
+
+        <div class="form-group">
+            <label >Father Name:</label>
+            <input type="text" name="member2_father_name" required >
+        </div>
+        
+        <div class="form-group">
+            <label>Contact Number:</label>
+            <input type="tel" name="member2_contact_number" required >
+        </div>
+        
+        <div class="form-group">
+            <label >Email:</label>
+            <input type="email"  name="member2_email" required >
+        </div>
+        
+        <div class="form-group">
+            <label >Address:</label>
+            <textarea  name="member2_address" required></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label >Date of Birth:</label>
+            <input type="date" name="member2_date_of_birth" required >
+        </div>
+
+        <div class="form-group">
+            <label >Emergency Contact Person:</label>
+            <input type="text"  name="member2_emergency_contact_person" required>
+        </div>
+
+        <div class="form-group">
+            <label >Emergency Contact Number:</label>
+            <input type="tel"  name="member2_emergency_contact_number" required>
+        </div> 
+
+       <div class="form-group">
+            <label>Photo (PDF)</label>
+            <input type="file" name="member2_photo" accept=".pdf"  required>
+        </div>
+
+        <div class="form-group">
+            <label >ID Aadhar (PDF):</label>
+            <input type="file" name="member2_id_proof" accept=".pdf" required>
+        </div>
+        
+        <div class="form-group">
+            <label >Police clearance (PDF):</label>
+            <input type="file" name="member2_id_proof_again" accept=".pdf" required>
+        </div>
+        <!-- EndForm -->
+        <!-- Form 3 -->
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="col col-lg-2"></div>
+                <div class="col-md-auto">
+                    <h5>Form4</h5>
+                </div>
+                <div class="col col-lg-2"></div>
+            </div>
+        </div>
+        {% csrf_token %}
+        <div class="form-group">
+            <label >Name:</label>
+            <input type="text"  name="member3_name" required >
+        </div> 
+
+        <div class="form-group">
+            <label >Father Name:</label>
+            <input type="text" name="member3_father_name" required >
+        </div>
+        
+        <div class="form-group">
+            <label>Contact Number:</label>
+            <input type="tel" name="member3_contact_number" required >
+        </div>
+        
+        <div class="form-group">
+            <label >Email:</label>
+            <input type="email"  name="member3_email" required >
+        </div>
+        
+        <div class="form-group">
+            <label >Address:</label>
+            <textarea  name="member3_address" required></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label >Date of Birth:</label>
+            <input type="date" name="member3_date_of_birth" required >
+        </div>
+
+        <div class="form-group">
+            <label >Emergency Contact Person:</label>
+            <input type="text"  name="member3_emergency_contact_person" required>
+        </div>
+
+        <div class="form-group">
+            <label >Emergency Contact Number:</label>
+            <input type="tel"  name="member3_emergency_contact_number" required>
+        </div> 
+
+        <div class="form-group">
+            <label>Photo (PDF)</label>
+            <input type="file" name="member3_photo" accept=".pdf"  required>
+        </div>
+
+        <div class="form-group">
+            <label >ID Aadhar (PDF):</label>
+            <input type="file" name="member3_id_proof" accept=".pdf" required>
+        </div>
+        
+        <div class="form-group">
+            <label >Police clearance (PDF):</label>
+            <input type="file" name="member3_id_proof_again" accept=".pdf" required>
+        </div>
+        <!-- Form 5 -->
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="col col-lg-2"></div>
+                <div class="col-md-auto">
+                    <h5>Form5</h5>
+                </div>
+                <div class="col col-lg-2"></div>
+            </div>
+        </div>
+        {% csrf_token %}
+        <div class="form-group">
+            <label >Name:</label>
+            <input type="text"  name="member4_name" required >
+        </div> 
+    
+        <div class="form-group">
+            <label >Father Name:</label>
+            <input type="text" name="member4_father_name" required >
+        </div>
+            
+        <div class="form-group">
+            <label>Contact Number:</label>
+            <input type="tel" name="member4_contact_number" required >
+        </div>
+            
+        <div class="form-group">
+            <label >Email:</label>
+            <input type="email"  name="member4_email" required >
+        </div>
+            
+        <div class="form-group">
+            <label >Address:</label>
+            <textarea  name="member4_address" required></textarea>
+        </div>
+            
+        <div class="form-group">
+            <label >Date of Birth:</label>
+            <input type="date" name="member4_date_of_birth" required >
+        </div>
+    
+        <div class="form-group">
+            <label >Emergency Contact Person:</label>
+            <input type="text"  name="member4_emergency_contact_person" required>
+        </div>
+    
+        <div class="form-group">
+            <label >Emergency Contact Number:</label>
+            <input type="tel"  name="member4_emergency_contact_number" required>
+        </div> 
+    
+        <div class="form-group">
+            <label>Photo (PDF)</label>
+            <input type="file" name="member4_photo" accept=".pdf"  required>
+        </div>
+        <div class="form-group">
+            <label >ID Aadhar (PDF):</label>
+            <input type="file" name="member4_id_proof" accept=".pdf" required>
+        </div>            
+        <div class="form-group">
+            <label >Police clearance (PDF):</label>
+            <input type="file" name="member4_id_proof_again" accept=".pdf" required>
+        </div>
+        <!-- ENdform -->
+        <!-- Form 6 -->
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="col col-lg-2"></div>
+                <div class="col-md-auto">
+                    <h5>Form6</h5>
+                </div>
+                <div class="col col-lg-2"></div>
+            </div>
+        </div>
+        {% csrf_token %}
+        <div class="form-group">
+            <label >Name:</label>
+            <input type="text"  name="member5_name" required >
+        </div> 
+    
+        <div class="form-group">
+            <label >Father Name:</label>
+            <input type="text" name="member5_father_name" required >
+        </div>
+            
+        <div class="form-group">
+            <label>Contact Number:</label>
+            <input type="tel" name="member5_contact_number" required >
+        </div>
+            
+        <div class="form-group">
+            <label >Email:</label>
+            <input type="email"  name="member5_email" required >
+        </div>
+            
+        <div class="form-group">
+            <label >Address:</label>
+            <textarea  name="member5_address" required></textarea>
+        </div>
+            
+        <div class="form-group">
+            <label >Date of Birth:</label>
+            <input type="date" name="member5_date_of_birth" required >
+        </div>
+    
+        <div class="form-group">
+            <label >Emergency Contact Person:</label>
+            <input type="text"  name="member5_emergency_contact_person" required>
+        </div>
+    
+        <div class="form-group">
+            <label >Emergency Contact Number:</label>
+            <input type="tel"  name="member5_emergency_contact_number" required>
+        </div> 
+    
+        <div class="form-group">
+            <label>Photo (PDF)</label>
+            <input type="file" name="member5_photo" accept=".pdf"  required>
+        </div>
+        <div class="form-group">
+            <label >ID Aadhar (PDF):</label>
+            <input type="file" name="member5_id_proof" accept=".pdf" required>
+        </div>            
+        <div class="form-group">
+            <label >Police clearance (PDF):</label>
+            <input type="file" name="member5_id_proof_again" accept=".pdf" required>
+        </div>
+        <!-- Endform -->
+        <!-- Form 7 -->
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="col col-lg-2"></div>
+                <div class="col-md-auto">
+                    <h5>Form 7</h5>
+                </div>
+                <div class="col col-lg-2"></div>
+            </div>
+        </div>
+        {% csrf_token %}
+        <div class="form-group">
+            <label >Name:</label>
+            <input type="text"  name="member6_name" required >
+        </div> 
+    
+        <div class="form-group">
+            <label >Father Name:</label>
+            <input type="text" name="member6_father_name" required >
+        </div>
+            
+        <div class="form-group">
+            <label>Contact Number:</label>
+            <input type="tel" name="member6_contact_number" required >
+        </div>
+            
+        <div class="form-group">
+            <label >Email:</label>
+            <input type="email"  name="member6_email" required >
+        </div>
+            
+        <div class="form-group">
+            <label >Address:</label>
+            <textarea  name="member6_address" required></textarea>
+        </div>
+            
+        <div class="form-group">
+            <label >Date of Birth:</label>
+            <input type="date" name="member6_date_of_birth" required >
+        </div>
+    
+        <div class="form-group">
+            <label >Emergency Contact Person:</label>
+            <input type="text"  name="member6_emergency_contact_person" required>
+        </div>
+    
+        <div class="form-group">
+            <label >Emergency Contact Number:</label>
+            <input type="tel"  name="member6_emergency_contact_number" required>
+        </div> 
+    
+        <div class="form-group">
+            <label>Photo (PDF)</label>
+            <input type="file" name="member6_photo" accept=".pdf"  required>
+        </div>
+        <div class="form-group">
+            <label >ID Aadhar (PDF):</label>
+            <input type="file" name="member6_id_proof" accept=".pdf" required>
+        </div>            
+        <div class="form-group">
+            <label >Police clearance (PDF):</label>
+            <input type="file" name="member6_id_proof_again" accept=".pdf" required>
+        </div>
+        <!-- Endform -->
+            <!-- Form 7 -->
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="col col-lg-2"></div>
+                <div class="col-md-auto">
+                    <h5>Form 8</h5>
+                </div>
+                <div class="col col-lg-2"></div>
+            </div>
+        </div>
+        {% csrf_token %}
+        <div class="form-group">
+            <label >Name:</label>
+            <input type="text"  name="member7_name" required >
+        </div> 
+    
+        <div class="form-group">
+            <label >Father Name:</label>
+            <input type="text" name="member7_father_name" required >
+        </div>
+            
+        <div class="form-group">
+            <label>Contact Number:</label>
+            <input type="tel" name="member7_contact_number" required >
+        </div>
+            
+        <div class="form-group">
+            <label >Email:</label>
+            <input type="email"  name="member7_email" required >
+        </div>
+            
+        <div class="form-group">
+            <label >Address:</label>
+            <textarea  name="member7_address" required></textarea>
+        </div>
+            
+        <div class="form-group">
+            <label >Date of Birth:</label>
+            <input type="date" name="member7_date_of_birth" required >
+        </div>
+    
+        <div class="form-group">
+            <label >Emergency Contact Person:</label>
+            <input type="text"  name="member7_emergency_contact_person" required>
+        </div>
+    
+        <div class="form-group">
+            <label >Emergency Contact Number:</label>
+            <input type="tel"  name="member7_emergency_contact_number" required>
+        </div> 
+    
+        <div class="form-group">
+            <label>Photo (PDF)</label>
+            <input type="file" name="member7_photo" accept=".pdf"  required>
+        </div>
+        <div class="form-group">
+            <label >ID Aadhar (PDF):</label>
+            <input type="file" name="member7_id_proof" accept=".pdf" required>
+        </div>            
+        <div class="form-group">
+            <label >Police clearance (PDF):</label>
+            <input type="file" name="member7_id_proof_again" accept=".pdf" required>
+        </div>
+        <!-- Endform -->
+        <!-- Package Section -->
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="col col-lg-2"></div>
+                <div class="col-md-auto">
+                    <h5>Package Select Section</h5>
+                </div>
+                <div class="col col-lg-2"></div>
+            </div>
+            <br>
+            {% for package, name in package_choices %}
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="package" value="{{ package }}">
+                <label class="form-check-label">{{ name }}</label>
+            </div>
+            {% endfor %}
+        </div>
+        <!-- End Package Section -->
+        <br>
+        <br>
+        <!-- Room Requerments -->
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="col col-lg-2"></div>
+                <div class="col-md-auto">
+                    <h5>Room Requerments</h5>
+                </div>
+                <div class="col col-lg-2"></div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                    <label >CheckIn:</label>
+                    <input type="date" name="checkin"  required >
+                </div> 
+              </div>
+              <div class="col">
+                <div class="form-group">
+                    <label >CheckOut:</label>
+                    <input type="date" name="checkout" required >
+                </div> 
+              </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <select class="form-select" name="number_of_rooms" aria-label="Default select example">
+                        <option selected>Number Of Room</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <select class="form-select" name="ac_or_nonac" aria-label="Default select example">
+                        <option selected>AC Choices</option>
+                        <option value="AC">1. AC</option>
+                        <option value="Non-AC">2. Non-AC</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <select class="form-select" name="veg_or_nonveg" aria-label="Default select example">
+                        <option selected>Food Choices</option>
+                        <option value="Veg">1. Veg</option>
+                        <option value="Non-veg">2. Non-Veg</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <!-- End Requerments -->
+        <br><br><br>
+        <button type="submit" class="btn btn-primary" name="submit">Submit</button>
+    </form>
+</div>
+{% endblock %}

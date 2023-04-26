@@ -1,0 +1,112 @@
+{% extends 'adminbase.html' %}
+{% load static  %}
+{% block title %} DashBoard {% endblock %}
+{% block content %}
+<main id="main" class="main">
+    {% if messages %}
+    {% for i in messages %}
+    <div class="alert alert-success bg-success text-light border-0 alert-dismissible fade show" role="alert">
+         {{i}}
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+    {% endif %}
+    <div class="card"> 
+        <div class="card-body">
+            <div class="table-responsive">
+                <br>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col">
+                            <div class="input-group">
+                                <div class="form-outline">
+                                    <input id="search" type="text" class="form-control" placeholder="Search...." />
+                                </div>                  
+                            </div>
+                        </div>                   
+                        <div class="col">
+                            <select name="island" class="form-select" aria-label="Default select example">
+                                <option value="">All Islands</option>
+                                {% for island, island_name in island_choices %}
+                                    <option value="{{ island }}" {% if selected_island == island %}selected{% endif %}>{{ island_name }}</option>
+                                {% endfor %}
+                            </select>                        
+                        </div>
+                        <div class="col">
+                            <button type="submit" class="btn btn-danger"><i class="uil uil-search"></i></button>                   
+                        </div>
+                    </div>  
+                </form>                 
+                <table class="table table-bordered table-hover" id="myTable">
+                    <br>
+                    <thead >
+                        <tr class="table-primary" id="chk-th">
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>contact</th>
+                            <th>Package</th>
+                            <th>Status</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in leader reversed %}
+                        <tr>
+                            <td>{{i.id}}</td>
+                            <td>{{i.leader_name}}</td>
+                            <td>{{i.leader_contact_number}}</td>
+                            <td>{{i.package}}</td>
+                            {% if i.status == 'Processing' %}
+                            <td class="text-warning"><strong>{{i.status}}</strong></td>
+                            {% elif i.status == 'open' %}
+                            <td class="text-success"><strong>{{i.status}}</strong></td>
+                            {% elif i.status == 'Confirm' %}
+                            <td class="text-primary"><strong>{{i.status}}</strong></td>
+                            {% else %}
+                            <td class="text-danger"><strong>{{i.status}}</strong></td>
+                            {% endif %}
+                            <td><a href="{% url 'leader_member' i.id %}" class="btn btn-sm btn-primary">Detail</a></td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="7">
+                                <a class="emty" style="color: rgb(255, 0, 0);left: 400px;position: relative;">
+                                    <strong>No travellers found</strong>
+                                </a>
+                            </td>                           
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <span class="text-danger" id="no-data"></span>
+            </div>
+        </div>
+    </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<style>
+    @media (max-width: 480px) {
+        .emty{
+            color: rgb(48, 12, 12);
+            left: 20px;
+            position: relative;
+        }
+  }
+</style>
+<script>
+$(document).ready(function(){
+    $("#search").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#myTable tbody tr").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+        if($("#myTable tbody tr:visible").length == 0){
+            $("#no-data").html("No data found");
+        }else{
+            $("#no-data").html("");
+        }
+    });
+});
+</script>
+{% endblock %}

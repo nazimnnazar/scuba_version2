@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Welcome {% endblock %}
+{% block content %}
+{% if messages %}
+    {% for message in messages %}
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script>
+            var m = "    {{ message }}"
+            swal("Good job!",m, "success");
+        </script>
+    {% endfor %}
+{% endif %}
+<div class="container">
+    <div class="row justify-content-md-center">
+        <h5 class="card-title">Welcome to Lakshadweep Scuba Adventures Pvt Ltd</h5>
+        <div class="col-md-auto">
+            <div class="card-body">
+                <p class="card-text">How many people are in your travel group?.</p>
+            </div>
+            <div class="form-floating mb-3">
+                <form method="post">
+                    {% csrf_token %}
+                    <select class="form-select" name="applicant-count" id="applicant-count" aria-label="Floating label select example">
+                        <option value="option1">1</option>
+                        <option value="option2">2</option>
+                        <option value="option3">3</option>
+                        <option value="option4">4</option>
+                        <option value="option5">5</option>
+                        <option value="option6">6</option>
+                        <option value="option7">7</option>
+                        <option value="option8">8</option>
+                        <option value="option9">9</option>
+                        <option value="option10">10</option>
+                        <option value="option11">11</option>
+                        <option value="option12">12</option>
+                        <option value="option13">13</option>
+                        <option value="option14">14</option>
+                        <option value="option15">15</option>
+                    </select>
+                    <button type="submit" class="btn btn-primary btn-lg">Selected</button>
+                </form>
+            </div> 
+        </div>
+    </div>
+</div>
+<style>
+    .form-select{
+        display:block;
+        width:100%;
+        padding:.375rem 2.25rem .375rem .75rem;
+        -moz-padding-start:
+        calc(0.75rem - 3px);
+        font-size:1rem;
+        font-weight:400;
+        line-height:1.5;
+        color:#212529;
+        background-color:#fff;
+        background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+        background-repeat:no-repeat;
+        background-position:right .75rem center;
+        background-size:16px 12px;
+        border:1px solid #ced4da;
+        border-radius:.375rem;
+        transition:border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+        -webkit-appearance:none;-moz-appearance:none;
+        appearance:none
+    }
+    @media (prefers-reduced-motion:reduce){
+        .form-select{
+            transition:none
+        }}
+        .form-select:focus{
+            border-color:#86b7fe;
+            outline:0;
+            box-shadow:0 0 0 .25rem rgba(13,110,253,.25)
+        }
+        .form-select[multiple],
+        .form-select[size]:not([size="1"]){
+            padding-right:.75rem;
+            background-image:none
+        }
+        .form-select:disabled{
+            background-color:#e9ecef
+        }
+        .form-select:-moz-focusring{
+            color:transparent;
+            text-shadow:0 0 0 #212529
+        }
+        .form-select-sm{
+            padding-top:.25rem;
+            padding-bottom:.25rem;
+            padding-left:.5rem;
+            font-size:.875rem;
+            border-radius:.25rem
+        }
+        .form-select-lg{
+            padding-top:.5rem;
+        }
+</style>
+{% endblock %}

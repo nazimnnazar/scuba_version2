@@ -1,0 +1,802 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Kalpeni admin</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+  <link href="{% static 'img/navlogo.jpg' %}" rel="icon">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+</head>
+<body>
+<header id="header" class="header fixed-top d-flex align-items-center">
+    <div class="d-flex align-items-center justify-content-between">
+        <a href="{% url 'kalpeni' %}" class="logo d-flex align-items-center">
+            <img src="{% static 'img/navlogo.jpg' %}" alt="">
+            <span class="d-none d-lg-block">Kalpeni Admin</span>
+        </a>
+        <i class="bi bi-list toggle-sidebar-btn"></i>
+    </div>
+    <nav class="header-nav ms-auto">
+        <ul class="d-flex align-items-center">
+            <li class="nav-item dropdown pe-3">
+                <a class="nav-link nav-profile d-flex align-items-center pe-0" href="error.html" data-bs-toggle="dropdown">
+                    <img src="{% static 'img/navlogo.jpg' %}" alt="Profile" class="rounded-circle">
+                    <span class="d-none d-md-block dropdown-toggle ps-2">{{user}}</span>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+                    <li class="dropdown-header">
+                        <h6>{{user}}</h6>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center" href="{% url 'logoutkalpeni' %}">
+                            <i class="bi bi-box-arrow-right"></i>
+                            <span>Sign Out</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+</header>
+<aside id="sidebar" class="sidebar">
+    <ul class="sidebar-nav" id="sidebar-nav">
+        <li class="nav-item">
+            <a class="nav-link " href="{% url 'kalpeni' %}">
+                <span>Dashboard</span>
+            </a>
+        </li>
+    </ul>
+</aside>  
+<main id="main" class="main">
+    {% if messages %}
+    {% for i in messages %}
+    <div class="alert alert-success bg-success text-light border-0 alert-dismissible fade show" role="alert">
+         {{i}}
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+    {% endif %}
+    <section class="section profile">
+        <div class="row">
+            <div class="card">
+                <div class="card-body pt-3">
+                <ul class="nav nav-tabs nav-tabs-bordered">
+                    <h4 class="heading">Details of travellers</h4>
+                </ul>
+                <h6 class="bg-h3"><i class="bi bi-pencil-square"></i>Edits</h6>
+                <div class="permit_btn">
+                    <a class="btn btn-primary" href="#" role="button" onclick="toggleBox(2)"><i class="bi bi-building"></i>Room</a>
+                </div>
+                <div class="room_btn">
+                    <a class="btn btn-primary" href="#" role="button" onclick="toggleBox(1)"><i class="bi bi-building"></i>Permit</a>
+                </div>
+                <div class="status_btn">
+                    <a class="btn btn-primary" href="#" role="button" onclick="toggleBox(3)"><i class="bi bi-chevron-bar-down"></i>Status</a>
+                </div>
+                <div class="payment_btn">
+                    <a class="btn btn-primary" href="#" role="button" onclick="toggleBox(4)"><i class="bi bi-currency-rupee"></i>Payment</a>
+                </div>
+                <!-- <div class="command-box">
+                    <div class="detailBox">
+                        <textarea placeholder="Type something here..."></textarea>
+                        <div class="bg_button_l">
+                            <a class="btn btn-danger" href="#" role="button"><i class="bi bi-pencil-fill"></i></a>
+                            <a class="btn btn-success" href="#" role="button"><i class="bi bi-check2"></i></a>
+                        </div>
+                    </div>
+                </div> -->
+                <hr class="line-mb2">
+                <hr class="line-mb">
+                 <!-- ============================================================================================================================== -->
+                    <!-- -----------------------------Permit--------------------------  -->
+                    <div class="box" id="box1">
+                        <div class="box-permit">
+                            <div class="d-flex justify-content-center">
+                                <p class="hed-permit"><strong>Permit</strong></p>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-sm-12">
+                                    <form method="POST" action="{% url 'permitkalpeni' team.id %}">
+                                        {% csrf_token %}
+                                        <label for="permit">Update Permit</label>
+                                        <select class="form-select" name="permit" aria-label="Default select example">
+                                        {% for choice in team.PERMIT %}
+                                            <option value="{{ choice.0 }}" {% if choice.0 == team.permit %}selected{% endif %}>{{choice.1}}</option>
+                                        {% endfor %}
+                                        </select>
+                                        <br>
+                                        <div class="container text-center">
+                                            <div class="row">
+                                                <div class="col"></div>
+                                                <div class="col">
+                                                    <button type="submit" class="btn btn-danger">Save</button>
+                                                </div>
+                                                <div class="col"></div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- -----------------------------End Permit----------------------  -->
+                    <!-- -----------------------------Room----------------------------- -->
+                    <div class="box" id="box2">
+                        <div class="room">
+                            <div class="position">
+                                <form method="POST" action="{% url 'kalpeni_room_edit' team.id %}">
+                                    {% csrf_token %}
+                                    <div class="row mb-3">
+                                        <div class="col-sm-5">
+                                            <label for="admin_checkin">Checkin</label>
+                                            <input type="date" class="form-control" name="admin_checkin" value="{{ team.admin_checkin|default_if_none:'' }}" required>
+                                        </div>
+                                        <div class="col-sm-5">
+                                            <label for="admin_checkout">Checkout:</label>
+                                            <input type="date" class="form-control" name="admin_checkout" value="{{ team.admin_checkout|default_if_none:'' }}" required>                
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="room_name" class="col-sm-2 col-form-label">Room</label>
+                                        <div class="col-sm-6">
+                                            <select class="form-select" name="room_name">
+                                                {% for choice in team.PROPERTY %}
+                                                    <option value="{{ choice.0 }}" {% if choice.0 == team.room_name %}selected{% endif %} >{{ choice.1 }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="admin_number_of_rooms" class="col-sm-2 col-form-label">Name</label>
+                                        <div class="col-sm-6">
+                                            <select class="form-select" name="admin_number_of_rooms">
+                                                {% for choice in team.ADMIN_ROOM_CHOICES %}
+                                                    <option value="{{ choice.0 }}" {% if choice.0 == team.admin_number_of_rooms %}selected{% endif %}>{{ choice.1 }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-center">
+                                        <button type="submit" class="btn btn-primary">Save</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- -----------------------------End--------------------------------->
+                    <!-- -----------------------------Status------------------------- -->
+                    <div class="box" id="box3">
+                        <div class="status">
+                            <div >
+                                <div class="card-status">
+                                    <br>
+                                    <div class="card-body">
+                                        <form method="POST" action="{% url 'statuskalpeni' team.id %}">
+                                            {% csrf_token %}
+                                            <select  name="status" class="form-control">
+                                                {% for choice in team.STATUS %}
+                                                <option value="{{ choice.0 }}" {% if choice.0 == team.status %}selected{% endif %}>{{choice.1}}</option>
+                                                {% endfor %}
+                                              </select>
+                                              <br>
+                                              <div class="card-body">
+                                                <div class="d-flex justify-content-center">
+                                                    <button type="submit" class="btn btn-primary">Update</button>
+                                                </div>
+                                            </div>                                        
+                                        </form>
+                                        <br>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- -----------------------------End Status----------------------- -->
+                    <!-- -----------------------------Payment-------------------------  -->
+                    <!-- <div class="box" id="box4">
+                        <div class="paymentbox">
+                            <br>
+                            <p> <strong>Package rate add</strong> </p>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text"><i class="bi bi-currency-rupee"></i></span>
+                                <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+                                <span class="input-group-text">.00</span>
+                            </div>
+                            <p><strong>Advanced</strong></p>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text"><i class="bi bi-currency-rupee"></i></span>
+                                <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+                                <span class="input-group-text">.00</span>
+                            </div>
+                            <div class="d-flex justify-content-center">
+                                <a href="" type="button" class="btn btn-primary">Enter</a>
+                            </div>
+                            <hr>
+                            <h5>Balance:
+                                <strong><i class="bi bi-currency-rupee"></i>20000</strong> 
+                            </h5>
+                        </div>
+                    </div> -->
+                    <!-- -----------------------------End Payment---------------------- -->
+        
+                    <!--------------------------------Applicant For loop Form ------------>
+                    <div class="tab-content pt-2">
+                        <div class="tab-pane fade show active profile-overview" id="profile-overview">
+                            <div class="row">
+                                <div class="bio-row">
+                                    <p><label class="my-label">Full Name </label>: {{team.leader_name}}</p>
+                                </div>
+                                <div class="bio-row">
+                                    <p><label class="my-label">Address</label>: {{team.leader_address}}</p>
+                                </div>
+                             
+                                <div class="bio-row">
+                                    <p><label class="my-label">Father Name </label>: {{team.leader_father_name}}</p>
+                                </div>
+                                <div class="bio-row">
+                                    <p><label class="my-label">Emergency person</label>: {{team.leader_emergency_contact_person}}</p>
+                                </div>
+                                
+                                <div class="bio-row">
+                                    <p><label class="my-label">Contact </label>:{{team.leader_contact_number}}</p>
+                                </div>
+                                <div class="bio-row">
+                                    <p><label class="my-label">Emergency Number </label>: {{team.leader_emergency_contact_number}}</p>
+                                </div>
+                                
+                                <div class="bio-row">
+                                    <p><label class="my-label">Email </label>:{{team.leader_email}}</p>
+                                </div>
+                                <div class="bio-row">
+                                    <p><label class="my-label">Date of birth </label>:{{team.leader_date_of_birth}}</p>
+                                </div>
+                                <div class="card-body">
+                                    <label class="documents"><i class="bi bi-file-earmark-text-fill"></i>Download Documents</label><br>
+                                    <a href="{% url 'download_kalpeni' team_id=team.id field_name='leader_photo' %}" class="btn btn-danger">Photo</a>
+                                    <a href="{% url 'download_kalpeni' team_id=team.id field_name='leader_id_adhaar' %}" class="btn btn-success">ID Adhaar</a>
+                                    <a href="{% url 'download_kalpeni' team_id=team.id field_name='leader_id_PCC' %}" class="btn btn-warning">PCC</a>
+                                </div>
+                                <hr>
+                                {% for i in team.team_members.all %}
+                                <div class="bio-row">
+                                    <p><label class="my-label">Full Name </label>: {{i.name}}</p>
+                                </div>
+                                <div class="bio-row">
+                                    <p><label class="my-label">Address</label>: {{i.address}}</p>
+                                </div>
+                             
+                                <div class="bio-row">
+                                    <p><label class="my-label">Father Name </label>: {{i.father_name}}</p>
+                                </div>
+                                <div class="bio-row">
+                                    <p><label class="my-label">Emergency person</label>: {{i.emergency_contact_person}}</p>
+                                </div>
+                                
+                                <div class="bio-row">
+                                    <p><label class="my-label">Contact </label>: {{i.contact_number}}</p>
+                                </div>
+                                <div class="bio-row">
+                                    <p><label class="my-label">Emergency Number </label>: {{i.emergency_contact_number}}</p>
+                                </div>
+                                
+                                <div class="bio-row">
+                                    <p><label class="my-label">Email </label>: {{i.email}}</p>
+                                </div>
+                                <div class="bio-row">
+                                    <p><label class="my-label">Date of birth </label>: {{i.date_of_birth}}</p>
+                                </div>
+                                <div class="card-body">
+                                    <label class="documents"><i class="bi bi-file-earmark-text-fill"></i>Download Documents</label><br>
+                                    {% if i.id %}
+                                    <a href="{% url 'download_member_file_kalpeni' team_id=team.id member_id=i.id field_name='photo' %}" class="btn btn-danger">Photo</a>
+                                    <a href="{% url 'download_member_file_kalpeni' team_id=team.id member_id=i.id field_name='id_proof' %}" class="btn btn-success">ID Aadhar </a>
+                                    <a href="{% url 'download_member_file_kalpeni' team_id=team.id member_id=i.id field_name='id_proof_again' %}" class="btn btn-warning">PCC</a>                                       
+                                    {% else %}
+                                    <div class="alert alert-danger bg-danger text-light border-0 alert-dismissible fade show" role="alert">
+                                        Documents Not Uploaded
+                                    </div>  
+                                    {% endif %}
+                                </div>
+                                <hr>
+                                {% endfor %}
+                            </div>
+                        </div>
+<!-- ================================================================================== -->
+                        <div class="card-group">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Card title</h5>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">Status  : <h6 class="btn btn-danger">{{team.status}}</h6> </li>
+                                        <li class="list-group-item">Permit  : <h6 class="btn btn-primary">{{team.permit}}</h6> </li></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Client Room Requerment</h5>
+                                    <div class="row">                                       
+                                        <div class="col">
+                                            <label class="" for="">Check In</label>
+                                        </div>
+                                        <div class="col">
+                                            <label class="col" for="">Check Out</label>
+                                        </div>
+                                        <div class="w-100"></div>
+                                        <div class="col">{{team.checkin}}</div>
+                                        <div class="col">{{team.checkout}}</div>
+                                    </div>
+                                    <hr>
+                                    <p class="card-text">AC Or Non AC : <span style="color:rgb(55, 0, 255);font-size: larger;"> {{team.ac_or_nonac}} </span></p>
+                                    <p class="card-text">Number Of Room :<span style="color:rgb(55, 0, 255);font-size: larger;"> {{team.number_of_rooms}}</span></p>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Admin Added Room</h5>
+                                    <div class="row">                                       
+                                        <div class="col">
+                                            <label class="" for="">Check In</label>
+                                        </div>
+                                        <div class="col">
+                                            <label class="col" for="">Check Out</label>
+                                        </div>
+                                        <div class="w-100"></div>
+                                        <div class="col">{{team.admin_checkin}}</div>
+                                        <div class="col">{{team.admin_checkout}}</div>
+                                    </div>
+                                    <hr>
+                                    <p class="font-weight-bold">Room Name: <span style="color:rgb(55, 0, 255);font-size: larger;"> {{team.room_name}}</span></p>
+                                    <p class="font-weight-bold">Number of room :<span style="color: rgb(55, 0, 255);font-size: larger;"> {{team.admin_number_of_rooms}}</span></p>                                
+                                </div>
+                            </div>
+                        </div>
+<!-- ======================================================================================= -->
+                    </div>
+            <!-------------------------------------End Applicant For loop Form -------------------------------------->
+            </div>
+        </div>
+    </section>
+</main>
+<body>
+<script>
+function toggleBox(boxNum) {
+  var box = document.getElementById("box" + boxNum);
+  var buttons = document.getElementsByClassName("button");
+  var boxes = document.getElementsByClassName("box");
+
+  for (var i = 0; i < buttons.length; i++) {
+    buttons[i].classList.remove("active");
+  }
+  for (var i = 0; i < boxes.length; i++) {
+    if (boxes[i] != box) {
+      boxes[i].style.display = "none";
+    }
+  }
+
+  if (box.style.display === "block") {
+    box.style.display = "none";
+  } else {
+    box.style.display = "block";
+    document.getElementById("button" + boxNum).classList.add("active");
+  }
+}
+</script>
+<style>
+
+.line-mb{
+    display: none;
+}
+.box {
+    display: none;
+}
+.hed-permit{
+    font-size: 19px;
+}
+.bg-body{
+    background: #a09a9a;
+}
+/* Permit box */
+.box-permit{
+    position: absolute;
+    top: 250px;
+    left: 285px;
+    margin: 0 auto;
+    width: 330px;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #f5f4f4;
+    box-shadow: 0 0px 12px rgba(0, 0, 0, 0.438);
+}
+.box-permit::before{
+    content: '';
+    height: 1.2rem;
+    width: 1.2rem;
+    background: #f5f4f4;
+    display: block;
+    position: absolute;
+    transform: rotate(45deg);
+    top:-0.6rem;
+}
+/* End Permit CSS */
+/* Room  Start */
+.room_btn{
+    position: absolute;
+    top: 82px;
+    left: 125px;
+}
+.room{
+    position: absolute;
+    top: 270px;
+    left: 260px;
+    max-width: 500px;
+    margin: 0 auto;
+    width: 450px;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #f4f5f5;
+    box-shadow: 0 0px 12px rgba(31, 31, 31, 0.774);
+}
+.room::before{
+    content: '';
+    height: 1.2rem;
+    width: 1.2rem;
+    background: #f5f4f4;
+    display: block;
+    position: absolute;
+    transform: rotate(45deg);
+    top:-0.6rem;
+}
+/* Room End */
+/* Status Button start */
+
+.status_btn{
+    position: absolute;
+    top: 82px;
+    left: 222px;
+}
+.status{
+    position: absolute;
+    top: 210px;
+    left: 370px;
+    max-width: 300px;
+    height: 149px;
+    margin: 0 auto;
+    width: 450px;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: #f5f4f4;
+    border-radius: 10px;
+    box-shadow: 0 0px 12px rgba(0, 0, 0, 0.438);
+}
+.status::before{
+    content: '';
+    height: 1.2rem;
+    width: 1.2rem;
+    background: #f5f4f4;
+    display: block;
+    position: absolute;
+    transform: rotate(45deg);
+    top:-0.6rem;
+}
+/* End Status Button */    
+/* Payment box */
+.payment_btn{
+    position: absolute;
+    top: 82px;
+    left: 317px;
+}
+.paymentbox{
+    position: absolute;
+    top: 315px;
+    left: 465px;
+    max-width: 300px;
+    margin: 0 auto;
+    width: 450px;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: #f5f4f4;
+    border-radius: 10px;
+    box-shadow: 0 0px 12px rgba(0, 0, 0, 0.438);
+}
+.paymentbox::before{
+    content: '';
+    height: 1.2rem;
+    width: 1.2rem;
+    background: #f5f4f4;
+    display: block;
+    position: absolute;
+    transform: rotate(45deg);
+    top:-0.6rem;
+}
+/* End Payment */
+.my-label {
+    color:  rgb(0, 0, 0);
+    font-size: 16px; 
+    font-weight: 600;   
+}
+.card-room{
+    position: absolute;
+    top: 10px;
+    left: 800px;
+    text-align: center;
+}  
+.documents{
+    color: rgb(26, 98, 255);
+}
+/* Comand BUtton start */
+
+/* End command button */
+/* Command box */
+
+.command-box{
+    position: absolute;
+    top: 69px;
+    left: 763px;
+    max-width: 500px;
+    height: 140px;
+    margin: 0 auto;
+    width: 2000px;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color:#d6dbd5;
+    border-radius: 5px;
+    /* box-shadow: 0 0px 12px rgba(0, 0, 0, 0.308); */
+}
+textarea {
+    position: absolute;
+    top: 13px;
+	width: 92%;
+	height: 60%;
+	resize: none;
+	padding: 10px;
+	border: none;
+    background-color: #ffffff;
+	font-size: 18px;
+	line-height: 1.5;
+	font-family: Arial, sans-serif;
+	box-sizing: border-box;
+	}
+textarea::placeholder {
+  font-size: 14px; /* Change this value to decrease or increase the size */
+}
+.bg_button_l{
+    position: absolute;
+    top: 100px;
+    font-size: 6px;
+}
+/* End commande box */
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+@media (max-width: 480px) {
+.btn {
+    font-size: 10px;
+    padding: 8px 12px;
+}
+.box {
+    display: none;
+ }
+ .card-room {
+    left: 200px;
+ }
+  .heading {
+    font-size: 19px;
+    left: -10px;
+    position: relative;
+ }
+ .card-button-bg{
+    position: absolute;
+    left: 90px;
+    top: 170px;
+ }
+ /* Permit box */
+ .box-permit{
+    position: absolute;
+    top: 250px;
+    left: 170px;
+    margin: 0 auto;
+    width: 330px;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #f5f4f4;
+    box-shadow: 0 0px 12px rgba(0, 0, 0, 0.438);
+}
+.box-permit::before{
+    content: '';
+    height: 1.2rem;
+    width: 1.2rem;
+    background: #f5f4f4;
+    display: block;
+    position: absolute;
+    transform: rotate(45deg);
+    top:-0.6rem;
+}
+ /* End permit box */
+ /* room box */
+ .room {
+    top: 315px;
+    left: 150px;  
+    max-width: 170px;
+    max-height: 900px;
+    margin: 0 auto;
+    background: #f5f4f4;
+    color: #000000;
+    border-radius: 10px;
+    max-height: 400px;
+ /* display: none; */
+ }
+.room::before{
+    content: '';
+    height: 1.2rem;
+    width: 1.2rem;
+    background: #f5f4f4;
+    display: block;
+    position: absolute;
+    transform: rotate(45deg);
+    top:-0.6rem;
+ }
+ .status{
+    top: 233px;
+    left: 170px;  
+    max-width: 250px;
+    max-height: 240px;
+    margin: 0 auto;
+    background:#f5f4f4;
+    color: #fff;
+    border-radius: 10px;
+    font-size: 10px;
+    padding: 8px 12px;
+ /* display: none; */
+ }
+ .status::before{
+    content: '';
+    height: 1.2rem;
+    width: 1.2rem;
+    background: #f5f4f4;
+    display: block;
+    position: absolute;
+    transform: rotate(45deg);
+    top:-0.6rem;
+    right: 20px;
+ }
+ .paymentbox{
+    top: 275px;
+    left: 180px;  
+    max-width: 250px;
+    margin: 0 auto;
+    background:#f5f4f4;
+    color: #000000;
+    border-radius: 10px;
+    font-size: 13px;
+    padding: 8px 12px;
+  }
+ .paymentbox::before{
+    content: '';
+    height: 1.2rem;
+    width: 1.2rem;
+    background: #f5f4f4;
+    display: block;
+    position: absolute;
+    transform: rotate(45deg);
+    top:-0.6rem;
+    right: 120px;
+ }
+ /* Comment box */
+ .command-box{
+    top: 57px;
+    left: 340px;  
+    max-width: 100px;
+    margin: 0 auto;
+    width: 100px;
+    height: 120px;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: #f5f4f4;
+    border-radius: 10px;
+    box-shadow: 0 0px 12px rgba(0, 0, 0, 0.308);
+    font-size: 13px;
+    padding: 8px 12px;
+}
+textarea {
+    position: absolute;
+    top: 5px;
+    left: 4px;  
+    max-width: 100px;
+    margin: 0 auto;
+    width: 90px;
+    height: 70px;
+    border-radius: 10px;
+	}
+textarea::placeholder {
+  font-size: 8px; /* Change this value to decrease or increase the size */
+}
+.bg_button_l{
+    position: absolute;
+    top: 78px;
+    left: 14px;  
+    max-width: 100px;
+    margin: 0 auto;
+    width: 90px;
+    height: 70px;
+    border-radius: 10px; 
+}
+.bg_button_l .btn {
+  width: 15px;
+  height: 20px;
+}
+.bg_button_l .btn i {
+  position: absolute;
+  font-size: 10px; 
+  top:1px;
+}
+ /* End Box */
+ /* buttons */
+ .permit_btn{
+    top: 70px;
+    position: absolute;
+    left: 5px;
+ }
+ .room_btn{
+    top: 70px;
+    position: absolute;
+    left: 76px;
+ }
+ .payment_btn{
+    top: 70px;
+    position: absolute;
+    left: 143px;
+ }
+ .status_btn{
+    top: 70px;
+    position: absolute;
+    left: 225px;
+ }
+.line-mb{
+    display: none;
+}
+.line-mb2{
+    position: relative;
+    top: 30px;
+    color: #000000;
+    background: #000;
+}
+/* End button */
+/* hr{
+    display: none;
+} */
+}
+.hidden {
+    display: none;
+}
+</style>
+</main>
+<body>
+  <script src="{% static 'assets/vendor/apexcharts/apexcharts.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/chart.js/chart.umd.js' %}"></script>
+  <script src="{% static 'assets/vendor/echarts/echarts.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/quill/quill.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/simple-datatables/simple-datatables.js' %}"></script>
+  <script src="{% static 'assets/vendor/tinymce/tinymce.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+  <script src="{% static 'assets/js/main.js' %}"></script>
+</body>
+</html>
