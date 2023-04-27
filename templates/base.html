@@ -22,8 +22,43 @@
                 </div>
             </a>
         </div>
+        <div class="text-left-hh">
+            <p 
+                style="
+                    color: rgb(18, 7, 173);
+                    left: 490px;
+                    position: absolute;
+                    font-size: larger;
+                    ">
+                <strong>Lakshadweep Scuba Adventures</strong>
+            </p>
+        </div>
     </nav>
 </header>
+<style>
+    @media (max-width: 768px) {
+        nav {
+            width: 100%;
+            flex-direction: column;
+            text-align: center;
+        }
+        nav p {
+           position: relative;
+            left: 100px;
+        }
+        .logo{
+            position: relative;
+            left: -145px;
+            font-size: .9em;
+        }
+        .text-left-hh{
+            top: -11px;
+            position: absolute;
+            left: -330px;
+            font-size: .9em;
+        }
+    }
+</style>
 <br>
 <body>
     {% block content %} 

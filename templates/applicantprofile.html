@@ -20,16 +20,16 @@
                 </ul>
                 <h6 class="bg-h3"><i class="bi bi-pencil-square"></i>Edits</h6>
                 <div class="permit_btn">
-                    <a class="btn btn-success" href="#" role="button" onclick="toggleBox(2)"><i class="bi bi-building"></i>Room/Permit</a>
+                    <a class="btn btn-primary" href="#" role="button" onclick="toggleBox(2)"><i class="bi bi-building"></i>Room</a>
                 </div>
                 <div class="room_btn">
-                    <!-- <a class="btn btn-primary" href="#" role="button" onclick="toggleBox(2)"><i class="bi bi-building"></i>Room/Permit</a> -->
+                    <a class="btn btn-primary" href="#" role="button" onclick="toggleBox(1)"><i class="bi bi-building"></i>Permit</a>
                 </div>
                 <div class="status_btn">
-                    <a class="btn btn-secondary" href="#" role="button" onclick="toggleBox(3)"><i class="bi bi-chevron-bar-down"></i>Status</a>
+                    <a class="btn btn-primary" href="#" role="button" onclick="toggleBox(3)"><i class="bi bi-chevron-bar-down"></i>Status</a>
                 </div>
                 <div class="payment_btn">
-                    <a class="btn btn-secondary" href="#" role="button" onclick="toggleBox(4)"><i class="bi bi-currency-rupee"></i>Payment</a>
+                    <a class="btn btn-primary" href="#" role="button" onclick="toggleBox(4)"><i class="bi bi-currency-rupee"></i>Payment</a>
                 </div>
                 <!-- <div class="command-box">
                     <div class="detailBox">
@@ -44,14 +44,14 @@
                 <hr class="line-mb">
                  <!-- ============================================================================================================================== -->
                     <!-- -----------------------------Permit--------------------------  -->
-                    <!-- <div class="box" id="box1">
+                    <div class="box" id="box1">
                         <div class="box-permit">
                             <div class="d-flex justify-content-center">
                                 <p class="hed-permit"><strong>Permit</strong></p>
                             </div>
                             <div class="row mb-3">
                                 <div class="col-sm-12">
-                                    <form method="POST" action="{% url 'team_edit' team.id %}">
+                                    <form method="POST" action="{% url 'permitkavarathi' team.id %}">
                                         {% csrf_token %}
                                         <label for="permit">Update Permit</label>
                                         <select class="form-select" name="permit" aria-label="Default select example">
@@ -73,7 +73,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div> -->
+                    </div>
                     <!-- -----------------------------End Permit----------------------  -->
                     <!-- -----------------------------Room----------------------------- -->
                     <div class="box" id="box2">
@@ -111,13 +111,8 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <hr>
-                                    <label for="permit">Update Permit</label>
-                                    <select class="form-select" name="permit" aria-label="Default select example">
-                                    {% for choice in team.PERMIT %}
-                                        <option value="{{ choice.0 }}" {% if choice.0 == team.permit %}selected{% endif %}>{{choice.1}}</option>
-                                    {% endfor %}
-                                    </select>
+
+
                                     <br>
                                     <div class="d-flex justify-content-center">
                                         <button type="submit" class="btn btn-primary">Save</button>
@@ -292,6 +287,7 @@
                                     <hr>
                                     <p class="card-text">AC Or Non AC : <span style="color:rgb(55, 0, 255);font-size: larger;"> {{team.ac_or_nonac}} </span></p>
                                     <p class="card-text">Number Of Room :<span style="color:rgb(55, 0, 255);font-size: larger;"> {{team.number_of_rooms}}</span></p>
+                                    <p class="card-text">Food type :<span style="color:rgb(55, 0, 255);font-size: larger;"> {{team.veg_or_nonveg}}</span></p>
                                 </div>
                             </div>
                             <div class="card">
@@ -362,8 +358,8 @@ function toggleBox(boxNum) {
 /* Permit box */
 .box-permit{
     position: absolute;
-    top: 240px;
-    left: 190px;
+    top: 250px;
+    left: 285px;
     margin: 0 auto;
     width: 330px;
     transform: translate(-50%, -50%);
@@ -387,11 +383,12 @@ function toggleBox(boxNum) {
 .room_btn{
     position: absolute;
     top: 82px;
-    left: 30px;
+    left: 125px;
+
 }
 .room{
     position: absolute;
-    top: 315px;
+    top: 270px;
     left: 260px;
     max-width: 500px;
     margin: 0 auto;
@@ -554,10 +551,10 @@ textarea::placeholder {
     top: 170px;
  }
  /* Permit box */
- .box-permit{
+.box-permit{
     position: absolute;
     top: 250px;
-    left: 170px;
+    left: 285px;
     margin: 0 auto;
     width: 330px;
     transform: translate(-50%, -50%);

@@ -87,7 +87,6 @@ def team_edit(request, team_id):
         team.admin_checkout = request.POST['admin_checkout']
         team.room_name = request.POST['room_name']
         team.admin_number_of_rooms = request.POST['admin_number_of_rooms']
-        team.permit = request.POST['permit']
         team.save()
         messages.success(request, "Room  Updated")
         # return render(request, 'applicantprofile.html',  team_id=team_id)
@@ -145,7 +144,15 @@ def search_leaders(request):
     else:
         return render(request, 'admin.html')
 # ========== END FUNCTION  ==========
-
+# =================PERMIT =============================
+def permitkavarathi(request,permit_id):
+    team = get_object_or_404(Team,pk=permit_id)
+    if request.method == 'POST':
+        team.permit = request.POST['permit']
+        team.save()
+        messages.success(request, "Permit Updated")
+    return render(request, 'applicantprofile.html',{'team':team})
+# =====================ENDPERMIT==================
 # ====================================== ACCOUNT ===========================================
 # ========== LOGIN  ==========
 def login(request):

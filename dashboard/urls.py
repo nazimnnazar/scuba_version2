@@ -13,5 +13,7 @@ urlpatterns = [
     path('search',views.search_leaders,name="search"),
     path('team/<int:team_id>/edit/', views.team_edit, name='team_edit'),
     path('statusu/<int:status_id>',views.statusur,name='statusur'),
+    path('permitkavarathi/<int:permit_id>/',views.permitkavarathi,name = 'permitkavarathi'),
+
     # path('adminpermit/<int:team_id>/',views.adminpermit,name='adminpermit'),
     ]

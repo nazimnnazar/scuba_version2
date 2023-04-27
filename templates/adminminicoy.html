@@ -102,7 +102,7 @@
                     </thead>
                     <tbody>                                     
                         {% for i in minicoy_island reversed %}
-                            {% if i.island == 'Minicoy' %}        
+                            <!-- {% if i.island == 'Minicoy' %}        
                             <tr>
                                 <td>{{i.id}}</td>
                                 <td>{{i.leader_name}}</td>
@@ -120,6 +120,68 @@
                                 <td><a href="{% url 'leader_details_mincoy' i.id %}" class="btn btn-sm btn-primary">Detail</a></td>
                             </tr>
                             {% else %}                        
+                            {% endif %} -->
+                            {% if i.status == 'Processing' %}
+                                {% if i.island == 'Minicoy' %}        
+                                <tr>
+                                    <td>{{i.id}}</td>
+                                    <td>{{i.leader_name}}</td>
+                                    <td>{{i.leader_contact_number}}</td>
+                                    <td>{{i.package}}</td>
+                                    {% if i.status == 'Processing' %}
+                                    <td class="text-warning"><strong>{{i.status}}</strong></td>
+                                    {% elif i.status == 'open' %}
+                                    <td class="text-success"><strong>{{i.status}}</strong></td>
+                                    {% elif i.status == 'Confirm' %}
+                                    <td class="text-primary"><strong>{{i.status}}</strong></td>
+                                    {% else %}
+                                    <td class="text-danger"><strong>{{i.status}}</strong></td>
+                                    {% endif %}
+                                    <td><a href="{% url 'leader_details_mincoy' i.id %}" class="btn btn-sm btn-primary">Detail</a></td>
+                                </tr>
+                                {% else %}                        
+                                {% endif %}
+                            {% elif i.status == 'open' %}
+                                {% if i.island == 'Minicoy' %}        
+                                    <tr>
+                                        <td>{{i.id}}</td>
+                                        <td>{{i.leader_name}}</td>
+                                        <td>{{i.leader_contact_number}}</td>
+                                        <td>{{i.package}}</td>
+                                        {% if i.status == 'Processing' %}
+                                        <td class="text-warning"><strong>{{i.status}}</strong></td>
+                                        {% elif i.status == 'open' %}
+                                        <td class="text-success"><strong>{{i.status}}</strong></td>
+                                        {% elif i.status == 'Confirm' %}
+                                        <td class="text-primary"><strong>{{i.status}}</strong></td>
+                                        {% else %}
+                                        <td class="text-danger"><strong>{{i.status}}</strong></td>
+                                        {% endif %}
+                                        <td><a href="{% url 'leader_details_mincoy' i.id %}" class="btn btn-sm btn-primary">Detail</a></td>
+                                    </tr>
+                                    {% else %}                        
+                                {% endif %}
+                            {% elif i.status == 'Confirm' %}
+                                {% if i.island == 'Minicoy' %}        
+                                    <tr>
+                                        <td>{{i.id}}</td>
+                                        <td>{{i.leader_name}}</td>
+                                        <td>{{i.leader_contact_number}}</td>
+                                        <td>{{i.package}}</td>
+                                        {% if i.status == 'Processing' %}
+                                        <td class="text-warning"><strong>{{i.status}}</strong></td>
+                                        {% elif i.status == 'open' %}
+                                        <td class="text-success"><strong>{{i.status}}</strong></td>
+                                        {% elif i.status == 'Confirm' %}
+                                        <td class="text-primary"><strong>{{i.status}}</strong></td>
+                                        {% else %}
+                                        <td class="text-danger"><strong>{{i.status}}</strong></td>
+                                        {% endif %}
+                                        <td><a href="{% url 'leader_details_mincoy' i.id %}" class="btn btn-sm btn-primary">Detail</a></td>
+                                    </tr>
+                                    {% else %}                        
+                                {% endif %}
+                            {% else %}
                             {% endif %}
                         {% endfor %}  
                     </tbody>

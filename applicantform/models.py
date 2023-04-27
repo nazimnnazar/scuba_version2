@@ -50,6 +50,7 @@ class Team(models.Model):
         ('open','open'),
         ('Confirm','Confirm'),
         ('Closed','Closed'),
+        ('Completed','Completed'),
     )
     PERMIT =(
         ('Applied','Applied'),
