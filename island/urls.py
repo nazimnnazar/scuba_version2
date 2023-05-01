@@ -12,6 +12,8 @@ urlpatterns = [
     path('permitagatti/<int:permit_id>/',views.permitagatti,name = 'permitagatti'),
     path('loginagatti',views.loginagatti,name='loginagatti'),
     path('logoutagatti',views.logoutagatti,name='logoutagatti'),
+    path('balance_agatti/<int:balance_id>/', views.input_balance_agatti, name='input_balance_agatti'),
+    path('todo_agatti/<int:todo_id>/', views.todo_agatti, name='todo_agatti'),
     #**************************END**************************
 
     #****************************KADMAT**************************
@@ -24,6 +26,8 @@ urlpatterns = [
     path('permitkadmat/<int:permit_id>/',views.permitkadmat,name = 'permitkadmat'),
     path('logoutkadmat',views.logoutkadmat,name='logoutkadmat'),
     path('loginkatmat',views.loginkatmat,name='loginkatmat'),
+    path('balance_kadmat/<int:balance_id>/', views.input_balance_kadmat, name='input_balance_kadmat'),
+    path('todo_kadmat/<int:todo_id>/', views.todo_kadmat, name='todo_kadmat'),
     #**************************END**************************
 
     # **************************** MINICOY **************************
@@ -36,6 +40,8 @@ urlpatterns = [
     path('permitminicoy/<int:permit_id>/',views.permitminicoy,name = 'permitminicoy'),
     path('logoutminicoy',views.logoutminicoy,name='logoutminicoy'),
     path('loginminicoy',views.loginminicoy,name='loginminicoy'),
+    path('balance_minicoy/<int:balance_id>/', views.input_balance_minicoy, name='input_balance_minicoy'),
+    path('todo_minicoy/<int:todo_id>/', views.todo_minicoy, name='todo_minicoy'),
     # **************************** END *******************************
 
     # **************************** KALPENI ******************************
@@ -48,5 +54,8 @@ urlpatterns = [
     path('permitkalpeni/<int:permit_id>/',views.permitkalpeni,name = 'permitkalpeni'),
     path('logoutkalpeni',views.logoutkalpeni,name='logoutkalpeni'),
     path('loginkalpeni',views.loginkalpeni,name='loginkalpeni'),
+    path('balance_kalpeni/<int:balance_id>/', views.input_balance_kalpeni, name='input_balance_kalpeni'),
+    path('todo_kalpeni/<int:todo_id>/', views.todo_kalpeni, name='todo_kalpeni'),
+
     # **************************** END **********************************
 ]

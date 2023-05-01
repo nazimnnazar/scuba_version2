@@ -200,3 +200,22 @@ def logout(request):
     return redirect('login')
 # ========== END FUNCTION  ==========
 # ====================================== END ACCOUNT ===========================================
+
+def input_balance(request,balance_id):
+    team = get_object_or_404(Team,pk=balance_id)
+    if request.method == 'POST':
+        team.balance = request.POST['balance']
+        team.save()
+    return render(request, 'applicantprofile.html',{'team': team})
+
+def todo(request,todo_id):
+    team = get_object_or_404(Team,pk=todo_id)
+    if request.method == 'POST':
+        team.todo  = request.POST['todo']
+        team.save()
+    return render(request, 'applicantprofile.html',{'team': team})
+    
+# --------------------------INVOICE---------------------------
+def invoice(request):
+    return render(request,'invoice.html')
+# ------------------------------END----------------------------

@@ -92,15 +92,17 @@
                 <div class="payment_btn">
                     <a class="btn btn-primary" href="#" role="button" onclick="toggleBox(4)"><i class="bi bi-currency-rupee"></i>Payment</a>
                 </div>
-                <!-- <div class="command-box">
+                <div class="command-box">
                     <div class="detailBox">
-                        <textarea placeholder="Type something here..."></textarea>
-                        <div class="bg_button_l">
-                            <a class="btn btn-danger" href="#" role="button"><i class="bi bi-pencil-fill"></i></a>
-                            <a class="btn btn-success" href="#" role="button"><i class="bi bi-check2"></i></a>
-                        </div>
+                        <form method="POST" action="{% url 'todo_agatti' todo_id=team.id %}">
+                            {% csrf_token %}
+                            <div class="input-group input-group-lg"> 
+                                <input type="text" id="todo" name="todo" value="{{ team.todo }}" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm">
+                            </div>
+                            <button class="btn btn-success" type="submit"><i class="bi bi-check2"></i></button>
+                        </form> 
                     </div>
-                </div> -->
+                </div>
                 <hr class="line-mb2">
                 <hr class="line-mb">
                  <!-- ============================================================================================================================== -->
@@ -212,25 +214,19 @@
                     <div class="box" id="box4">
                         <div class="paymentbox">
                             <br>
-                            <p> <strong>Package rate add</strong> </p>
-                            <div class="input-group mb-3">
-                                <span class="input-group-text"><i class="bi bi-currency-rupee"></i></span>
-                                <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
-                                <span class="input-group-text">.00</span>
-                            </div>
-                            <p><strong>Advanced</strong></p>
-                            <div class="input-group mb-3">
-                                <span class="input-group-text"><i class="bi bi-currency-rupee"></i></span>
-                                <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
-                                <span class="input-group-text">.00</span>
-                            </div>
-                            <div class="d-flex justify-content-center">
-                                <a href="" type="button" class="btn btn-primary">Enter</a>
-                            </div>
-                            <hr>
-                            <h5>Balance:
-                                <strong><i class="bi bi-currency-rupee"></i>20000</strong> 
-                            </h5>
+                            <form method="POST" action="{% url 'input_balance_agatti' balance_id=team.id %}">
+                                {% csrf_token %}
+                                <p> <strong>Package rate add</strong> </p>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text"><i class="bi bi-currency-rupee"></i></span>
+                                    <input type="number" id="balance" name="balance" value="{{ team.balance }}">      
+                                </div>
+                                <div class="row">
+                                    <div class="col"></div>
+                                    <div class="col"><button class="btn btn-success" type="submit">Add</button></div>
+                                    <div class="col"></div>
+                                </div>                            
+                            </form> 
                         </div>
                     </div>
                     <!-- -----------------------------End Payment---------------------- -->
@@ -506,7 +502,7 @@ function toggleBox(boxNum) {
 }
 .paymentbox{
     position: absolute;
-    top: 315px;
+    top: 240px;
     left: 465px;
     max-width: 300px;
     margin: 0 auto;

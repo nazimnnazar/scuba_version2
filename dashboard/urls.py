@@ -14,6 +14,8 @@ urlpatterns = [
     path('team/<int:team_id>/edit/', views.team_edit, name='team_edit'),
     path('statusu/<int:status_id>',views.statusur,name='statusur'),
     path('permitkavarathi/<int:permit_id>/',views.permitkavarathi,name = 'permitkavarathi'),
-
+    path('balance/<int:balance_id>/', views.input_balance, name='input_balance'),
+    path('todo/<int:todo_id>/', views.todo, name='todo'),
     # path('adminpermit/<int:team_id>/',views.adminpermit,name='adminpermit'),
+    path('invoice',views.invoice,name='invoice'),
     ]

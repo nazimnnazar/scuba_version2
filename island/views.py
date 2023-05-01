@@ -104,7 +104,19 @@ def loginagatti(request):
 def logoutagatti(request):
     auth.logout(request)
     return redirect('loginagatti')
-    # ***************** END FUNCTION *****************
+def input_balance_agatti(request,balance_id):
+    team = get_object_or_404(Team,pk=balance_id)
+    if request.method == 'POST':
+        team.balance = request.POST['balance']
+        team.save()
+    return render(request, 'applicantprofileisland.html', {'team': team})
+def todo_agatti(request,todo_id):
+    team = get_object_or_404(Team,pk=todo_id)
+    if request.method == 'POST':
+        team.todo  = request.POST['todo']
+        team.save()
+    return render(request, 'applicantprofileisland.html', {'team': team})    
+# ***************** END FUNCTION *****************
 # ******************************** AGATTI DASHBOARD LOOP **************************************
 @login_required(login_url='loginkatmat')
 def leader_details_kadmat(request,team_id):
@@ -178,6 +190,20 @@ def loginkatmat(request):
 def logoutkadmat(request):
     auth.logout(request)
     return redirect('loginkatmat')
+
+def input_balance_kadmat(request,balance_id):
+    team = get_object_or_404(Team,pk=balance_id)
+    if request.method == 'POST':
+        team.balance = request.POST['balance']
+        team.save()
+    return render(request, 'applicantprofilekadmat.html',{'team': team})
+
+def todo_kadmat(request,todo_id):
+    team = get_object_or_404(Team,pk=todo_id)
+    if request.method == 'POST':
+        team.todo  = request.POST['todo']
+        team.save()
+    return render(request, 'applicantprofilekadmat.html',{'team': team})
 # ***************** END LOGIN  *****************
 # ++++++++++++++++++++++++++++++++++MINICOY++++++++++++++++++++++++++++++++++++
 @login_required(login_url='loginminicoy')
@@ -255,6 +281,20 @@ def loginminicoy(request):
 def logoutminicoy(request):
     auth.logout(request)
     return redirect('loginminicoy')
+
+def input_balance_minicoy(request,balance_id):
+    team = get_object_or_404(Team,pk=balance_id)
+    if request.method == 'POST':
+        team.balance = request.POST['balance']
+        team.save()
+    return render(request, 'applicantprofile_minicoy.html',{'team': team})
+
+def todo_minicoy(request,todo_id):
+    team = get_object_or_404(Team,pk=todo_id)
+    if request.method == 'POST':
+        team.todo  = request.POST['todo']
+        team.save()
+    return render(request, 'applicantprofile_minicoy.html',{'team': team})
 # ***************** END FUNCTION *****************
 # ++++++++++++++++++++++++++++++++++KALPENI++++++++++++++++++++++++++++++++++++
 @login_required(login_url='loginkalpeni')
@@ -334,6 +374,21 @@ def loginkalpeni(request):
 def logoutkalpeni(request):
     auth.logout(request)
     return redirect('loginkalpeni')
+
+def input_balance_kalpeni(request,balance_id):
+    team = get_object_or_404(Team,pk=balance_id)
+    if request.method == 'POST':
+        team.balance = request.POST['balance']
+        team.save()
+    return render(request,'applicantprofile_kalpeni.html',{'team':team})
+
+def todo_kalpeni(request,todo_id):
+    team = get_object_or_404(Team,pk=todo_id)
+    if request.method == 'POST':
+        team.todo  = request.POST['todo']
+        team.save()
+    return render(request,'applicantprofile_kalpeni.html',{'team':team})
+
 # ++++++++++++++++++++++++++++++++++++++END++++++++++++++++++++++++++++++++++++++
 
 # $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ APPLICANT DETAILS $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$

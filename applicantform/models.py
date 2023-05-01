@@ -116,6 +116,8 @@ class Team(models.Model):
     admin_checkout = models.DateField(blank=True,null=True)
     room_name = models.CharField(max_length=200,choices=PROPERTY)
     admin_number_of_rooms = models.CharField(max_length=10, choices=ADMIN_ROOM_CHOICES)
+    balance = models.DecimalField(max_digits=1000000, decimal_places=2)
+    todo = models.CharField(max_length=500)
     def __str__(self):
         return f'Team {self.id} - Leader: {self.leader_name}'
     

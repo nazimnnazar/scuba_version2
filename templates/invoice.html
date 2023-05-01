@@ -1,0 +1,191 @@
+{% extends 'adminbase.html' %}
+{% load static  %}
+{% block title %} DashBoard {% endblock %}
+{% block content %}
+<main id="main" class="main">  
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Generate Bill</h5>
+            <form action="">
+                <div class="row mb-3">
+                    <label for="inputText" class="col-sm-2 col-form-label">Name</label>
+                    <div class="col-sm-10">
+                        <input type="text" id="name" name="name" class="form-control">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="inputText" class="col-sm-2 col-form-label">Contact Number</label>
+                    <div class="col-sm-10">
+                        <input type="tel" id="contact" name="contact" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" class="form-control">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="inputText" class="col-sm-2 col-form-label">Number of room</label>
+                    <div class="col-sm-10">
+                        <input type="number" id="rooms" name="rooms" min="1" max="10" class="form-control">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="inputDate" class="col-sm-2 col-form-label">Arrival</label>
+                    <div class="col-sm-10">
+                        <input type="date" id="checkin" name="checkin" class="form-control">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="inputDate" class="col-sm-2 col-form-label">Departure</label>
+                    <div class="col-sm-10">
+                        <input type="date" id="checkout" name="checkout" class="form-control">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="inputText" class="col-sm-2 col-form-label">Payment</label>
+                    <div class="col-sm-10">
+                        <input type="number" id="payment" name="payment" min="0" class="form-control">
+                    </div>
+                </div>
+                <button type="button" onclick="generateReservation()" class="btn btn-danger">Generate </button>
+            </form>
+        </div>
+    </div>
+      <script src="script.js"></script>
+      <!-- <script> 
+        function generateReservation() {
+        var name = document.getElementById("name").value;
+        var contact = document.getElementById("contact").value;
+        var rooms = document.getElementById("rooms").value;
+        var checkin = document.getElementById("checkin").value;
+        var checkout = document.getElementById("checkout").value;
+        var payment = document.getElementById("payment").value;
+
+        if (!name || !contact || !rooms || !checkin || !checkout || !payment) {
+            alert("Please fill out all fields.");
+            return;
+        }
+        var canvas = document.createElement("canvas");
+        canvas.width = 800;
+        canvas.height = 600;
+        var ctx = canvas.getContext("2d");
+        var logoImg = new Image();
+        logoImg.src = "{% static 'img/navlogo.jpg' %}";
+        logoImg.onload = function() {
+            ctx.drawImage(logoImg, 20, 20, 150, 80);
+            ctx.font = "30px Arial";
+            ctx.fillText("Reservation Bill", 400, 50);
+            ctx.font = "20px Arial";
+            ctx.fillText("Name: " + name, 50, 150);
+            ctx.fillText("Contact Number: " + contact, 50, 200);
+            ctx.fillText("Number of Rooms: " + rooms, 50, 250);
+            ctx.fillText("Arrival: " + checkin, 50, 300);
+            ctx.fillText("Departure: " + checkout, 50, 350);
+            ctx.fillText("Payment: $" + payment, 50, 400);
+            var dataURL = canvas.toDataURL("image/jpeg", 1.0); // Use JPEG format with 100% quality
+            var img = document.createElement("img");
+            img.src = dataURL;
+            var div = document.createElement("div");
+            div.appendChild(img);
+            var downloadBtn = document.createElement("a");
+            downloadBtn.href = dataURL;
+            downloadBtn.download = "reservation_bill.jpg";
+            downloadBtn.innerHTML = "Download Bill";
+            div.appendChild(downloadBtn);
+
+            document.body.appendChild(div);
+        }
+        }
+    </script> -->
+    <script src="https://cdn.tiny.cloud/1/{your-api-key}/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script> 
+  tinymce.init({
+    selector: 'textarea',
+    plugins: 'image link',
+    toolbar: 'undo redo | bold italic | image link',
+  });
+
+  function generateReservation() {
+    var name = document.getElementById("name").value;
+    var contact = document.getElementById("contact").value;
+    var rooms = document.getElementById("rooms").value;
+    var checkin = document.getElementById("checkin").value;
+    var checkout = document.getElementById("checkout").value;
+    var payment = document.getElementById("payment").value;
+
+    if (!name || !contact || !rooms || !checkin || !checkout || !payment) {
+      alert("Please fill out all fields.");
+      return;
+    }
+
+    var canvas = document.createElement("canvas");
+    canvas.width = 800;
+    canvas.height = 600;
+    var ctx = canvas.getContext("2d");
+    var logoImg = new Image();
+    logoImg.src = "{% static 'img/navlogo.jpg' %}";
+    logoImg.onload = function() {
+      ctx.drawImage(logoImg, 20, 20, 150, 80);
+      ctx.font = "30px Arial";
+      ctx.fillText("Reservation Bill", 400, 50);
+      ctx.font = "20px Arial";
+      ctx.fillText("Name: " + name, 50, 150);
+      ctx.fillText("Contact Number: " + contact, 50, 200);
+      ctx.fillText("Number of Rooms: " + rooms, 50, 250);
+      ctx.fillText("Arrival: " + checkin, 50, 300);
+      ctx.fillText("Departure: " + checkout, 50, 350);
+      ctx.fillText("Payment: $" + payment, 50, 400);
+      var dataURL = canvas.toDataURL("image/jpeg", 1.0); // Use JPEG format with 100% quality
+      var img = document.createElement("img");
+      img.src = dataURL;
+      var div = document.createElement("div");
+      div.appendChild(img);
+      var downloadBtn = document.createElement("a");
+      downloadBtn.href = dataURL;
+      downloadBtn.download = "reservation_bill.jpg";
+      downloadBtn.innerHTML = "Download Bill";
+      div.appendChild(downloadBtn);
+
+      document.body.appendChild(div);
+    }
+  }
+</script>
+
+</main>
+{% endblock %}
+// function generateReservation() {
+    //   var name = document.getElementById("name").value;
+    //   var contact = document.getElementById("contact").value;
+    //   var rooms = document.getElementById("rooms").value;
+    //   var checkin = document.getElementById("checkin").value;
+    //   var checkout = document.getElementById("checkout").value;
+    //   var payment = document.getElementById("payment").value;
+
+    //   if (!name || !contact || !rooms || !checkin || !checkout || !payment) {
+    //     alert("Please fill out all fields.");
+    //     return;
+    //   }
+
+    //   var canvas = document.createElement("canvas");
+    //       canvas.width = 400;
+    //       canvas.height = 300;
+    //   var ctx = canvas.getContext("2d");
+    //       ctx.fillStyle = "#fff";
+    //       ctx.fillRect(0, 0, canvas.width, canvas.height);
+    //       ctx.fillStyle = "#000";
+    //       ctx.font = "bold 20px Arial";
+    //       ctx.fillText("Lakshadweep Scuba Adventures", 55, 30);
+    //       ctx.font = "bold 16px Arial";
+    //       ctx.fillText(`Name: ${name}`, 20, 80);
+    //       ctx.fillText(`Contact Number: ${contact}`, 20, 120);
+    //       ctx.fillText(`Number of Rooms: ${rooms}`, 20, 160);
+    //       ctx.fillText(`Check-in: ${checkin}`, 20, 200);
+    //       ctx.fillText(`Check-out: ${checkout}`, 20, 240);
+    //       ctx.fillText(`Payment: $${payment}`, 20, 280);
+
+    //   var dataURL = canvas.toDataURL("image/jpeg");
+
+    //   var element = document.createElement("a");
+    //       element.setAttribute("href", dataURL);
+    //       element.setAttribute("download", `${name}-reservation.jpg`);
+    //       element.style.display = "none";
+    //       document.body.appendChild(element);
+    //       element.click();
+    //       document.body.removeChild(element);
+    // }
