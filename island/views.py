@@ -116,6 +116,9 @@ def todo_agatti(request,todo_id):
         team.todo  = request.POST['todo']
         team.save()
     return render(request, 'applicantprofileisland.html', {'team': team})    
+
+def invoice_agatti(request):
+    return render(request,'invoice_agatti.html')
 # ***************** END FUNCTION *****************
 # ******************************** AGATTI DASHBOARD LOOP **************************************
 @login_required(login_url='loginkatmat')
@@ -204,6 +207,8 @@ def todo_kadmat(request,todo_id):
         team.todo  = request.POST['todo']
         team.save()
     return render(request, 'applicantprofilekadmat.html',{'team': team})
+def invoice_kadmat(request):
+    return render(request,'invoice_kadmat.html')
 # ***************** END LOGIN  *****************
 # ++++++++++++++++++++++++++++++++++MINICOY++++++++++++++++++++++++++++++++++++
 @login_required(login_url='loginminicoy')
@@ -295,6 +300,8 @@ def todo_minicoy(request,todo_id):
         team.todo  = request.POST['todo']
         team.save()
     return render(request, 'applicantprofile_minicoy.html',{'team': team})
+def invoice_minicoy(request):
+    return render(request,'invoice_minicoy.html')
 # ***************** END FUNCTION *****************
 # ++++++++++++++++++++++++++++++++++KALPENI++++++++++++++++++++++++++++++++++++
 @login_required(login_url='loginkalpeni')
@@ -388,7 +395,8 @@ def todo_kalpeni(request,todo_id):
         team.todo  = request.POST['todo']
         team.save()
     return render(request,'applicantprofile_kalpeni.html',{'team':team})
-
+def invoice_kalpeni(request):
+    return render(request,'invoice_kalpeni.html')
 # ++++++++++++++++++++++++++++++++++++++END++++++++++++++++++++++++++++++++++++++
 
 # $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ APPLICANT DETAILS $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$

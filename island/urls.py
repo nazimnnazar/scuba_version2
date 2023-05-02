@@ -14,6 +14,7 @@ urlpatterns = [
     path('logoutagatti',views.logoutagatti,name='logoutagatti'),
     path('balance_agatti/<int:balance_id>/', views.input_balance_agatti, name='input_balance_agatti'),
     path('todo_agatti/<int:todo_id>/', views.todo_agatti, name='todo_agatti'),
+    path('invoice_agatti',views.invoice_agatti,name='invoice_agatti'),
     #**************************END**************************
 
     #****************************KADMAT**************************
@@ -28,6 +29,7 @@ urlpatterns = [
     path('loginkatmat',views.loginkatmat,name='loginkatmat'),
     path('balance_kadmat/<int:balance_id>/', views.input_balance_kadmat, name='input_balance_kadmat'),
     path('todo_kadmat/<int:todo_id>/', views.todo_kadmat, name='todo_kadmat'),
+    path('invoice_kadmat',views.invoice_kadmat,name='invoice_kadmat'),
     #**************************END**************************
 
     # **************************** MINICOY **************************
@@ -42,6 +44,7 @@ urlpatterns = [
     path('loginminicoy',views.loginminicoy,name='loginminicoy'),
     path('balance_minicoy/<int:balance_id>/', views.input_balance_minicoy, name='input_balance_minicoy'),
     path('todo_minicoy/<int:todo_id>/', views.todo_minicoy, name='todo_minicoy'),
+    path('invoice_minicoy',views.invoice_minicoy,name='invoice_minicoy'),
     # **************************** END *******************************
 
     # **************************** KALPENI ******************************
@@ -56,6 +59,6 @@ urlpatterns = [
     path('loginkalpeni',views.loginkalpeni,name='loginkalpeni'),
     path('balance_kalpeni/<int:balance_id>/', views.input_balance_kalpeni, name='input_balance_kalpeni'),
     path('todo_kalpeni/<int:todo_id>/', views.todo_kalpeni, name='todo_kalpeni'),
-
+    path('invoice_kalpeni',views.invoice_kalpeni,name='invoice_kalpeni')
     # **************************** END **********************************
 ]

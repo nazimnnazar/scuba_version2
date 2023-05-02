@@ -109,7 +109,7 @@ def option1(request):
                 veg_or_nonveg=request.POST['veg_or_nonveg'],    
                 package=package_str        
             )
-            messages.success(request,'Your Data Successfully Saved')
+            messages.success(request,'Registered Successfully')
             return redirect('/')
     else:
         package_choices = Team.PACKAGE
@@ -154,7 +154,7 @@ def option2(request):
                 id_proof=request.FILES['member_id_proof'],
                 id_proof_again=request.FILES['member_id_proof_again']
             )
-            messages.success(request,'Your Data Successfully Saved')
+            messages.success(request,'Registered Successfully')
             return redirect('/')
     else:
         package_choices = Team.PACKAGE
@@ -214,7 +214,7 @@ def option3(request):
                 id_proof=request.FILES['member2_id_proof'],
                 id_proof_again=request.FILES['member2_id_proof_again']
             )
-            messages.success(request,'Your Data Successfully Saved')
+            messages.success(request,'Registered Successfully')
             return redirect('/')
     else:
         package_choices = Team.PACKAGE
@@ -288,7 +288,7 @@ def option4(request):
                 id_proof=request.FILES['member3_id_proof'],
                 id_proof_again=request.FILES['member3_id_proof_again']
             )
-            messages.success(request,'Your Data Successfully Saved')
+            messages.success(request,'Registered Successfully')
             return redirect('/')
     else:
         package_choices = Team.PACKAGE
@@ -375,7 +375,7 @@ def option5(request):
                 id_proof=request.FILES['member4_id_proof'],
                 id_proof_again=request.FILES['member4_id_proof_again']
             )
-            messages.success(request,'Your Data Successfully Saved')
+            messages.success(request,'Registered Successfully')
             return redirect('/')
     else:
         package_choices = Team.PACKAGE
@@ -475,7 +475,7 @@ def option6(request):
                 id_proof=request.FILES['member5_id_proof'],
                 id_proof_again=request.FILES['member5_id_proof_again']
             )
-            messages.success(request,'Your Data Successfully Saved')
+            messages.success(request,'Registered Successfully')
             return redirect('/')
     else:
         package_choices = Team.PACKAGE
@@ -589,7 +589,7 @@ def option7(request):
                 id_proof=request.FILES['member6_id_proof'],
                 id_proof_again=request.FILES['member6_id_proof_again']
             )
-            messages.success(request,'Your Data Successfully Saved')
+            messages.success(request,'Registered Successfully')
             return redirect('/')
     else:
         package_choices = Team.PACKAGE
@@ -717,7 +717,7 @@ def option8(request):
                 id_proof=request.FILES['member7_id_proof'],
                 id_proof_again=request.FILES['member7_id_proof_again']
             )
-            messages.success(request,'Your Data Successfully Saved')
+            messages.success(request,'Registered Successfully')
             return redirect('/')
     else:
         package_choices = Team.PACKAGE
@@ -858,7 +858,7 @@ def option9(request):
                 id_proof=request.FILES['member8_id_proof'],
                 id_proof_again=request.FILES['member8_id_proof_again']
             )
-            messages.success(request,'Your Data Successfully Saved')
+            messages.success(request,'Registered Successfully')
             return redirect('/')
     else:
         package_choices = Team.PACKAGE
@@ -1014,7 +1014,7 @@ def option10(request):
                 id_proof=request.FILES['member9_id_proof'],
                 id_proof_again=request.FILES['member9_id_proof_again']
             )
-            messages.success(request,'Your Data Successfully Saved')
+            messages.success(request,'Registered Successfully')
             return redirect('/')
     else:
         package_choices = Team.PACKAGE
@@ -1184,7 +1184,7 @@ def option11(request):
                 id_proof=request.FILES['member10_id_proof'],
                 id_proof_again=request.FILES['member10_id_proof_again']
             )
-            messages.success(request,'Your Data Successfully Saved')
+            messages.success(request,'Registered Successfully')
             return redirect('/')
     else:
         package_choices = Team.PACKAGE
@@ -1368,7 +1368,7 @@ def option12(request):
                 id_proof=request.FILES['member11_id_proof'],
                 id_proof_again=request.FILES['member11_id_proof_again']
             )
-            messages.success(request,'Your Data Successfully Saved')
+            messages.success(request,'Registered Successfully')
             return redirect('/')
     else:
         package_choices = Team.PACKAGE
@@ -1566,7 +1566,7 @@ def option13(request):
                 id_proof=request.FILES['member12_id_proof'],
                 id_proof_again=request.FILES['member12_id_proof_again']
             )
-            messages.success(request,'Your Data Successfully Saved')
+            messages.success(request,'Registered Successfully')
             return redirect('/')
     else:
         package_choices = Team.PACKAGE
@@ -1778,7 +1778,7 @@ def option14(request):
                 id_proof=request.FILES['member13_id_proof'],
                 id_proof_again=request.FILES['member13_id_proof_again']
             )
-            messages.success(request,'Your Data Successfully Saved')
+            messages.success(request,'Registered Successfully')
             return redirect('/')
     else:
         package_choices = Team.PACKAGE
@@ -2004,7 +2004,7 @@ def option15(request):
                 id_proof=request.FILES['member14_id_proof'],
                 id_proof_again=request.FILES['member14_id_proof_again']
             )
-            messages.success(request,'Your Data Successfully Saved')
+            messages.success(request,'Registered Successfully')
             return redirect('/')
     else:
         package_choices = Team.PACKAGE
