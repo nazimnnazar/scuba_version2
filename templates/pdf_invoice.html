@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>INVOICE</title>
+  </head>
+  <body>
+    <div id="content">
+        <div class="card">
+            <div class="card-header bg-black"></div>
+            <div class="card-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <i class="far fa-building text-danger fa-6x float-start"></i>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <ul class="list-unstyled float-end">
+                            <li style="font-size: 30px; color: rgb(0, 174, 255);">Lakshadweep Scuba Adventures Pvt Ltd</li>
+                            <li>9497766224</li>
+                            <li>lakscuba@gmail.com</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row mx-3">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Guest :</td>
+                                    <td><i class="fas fa-dollar-sign"></i> {{name}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Contact Number:</td>
+                                    <td><i class="fas fa-dollar-sign"></i> {{contact}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Number of Guests:</td>
+                                    <td><i class="fas fa-dollar-sign"></i> {{rooms}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Accommodation:</td>
+                                    <td><i class="fas fa-dollar-sign"></i>Rooms {{rooms}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Arrival:</td>
+                                    <td><i class="fas fa-dollar-sign"></i> {{checkin}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Departure:</td>
+                                    <td><i class="fas fa-dollar-sign"></i> {{checkout}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Prepayment:</td>
+                                    <td><i class="fas fa-dollar-sign"></i> {{prepayment}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>  
+                    <div class="row">
+                        <div class="col">
+                            <p >Date: <span class="text-muted">{{today}}</span></p>
+                            <p class="fw-bold mt-3">Signature:</p>
+                        </div>
+                        <div class="col" style="margin-left:60px">
+                            <p class="float-end"
+                            style="font-size: 30px; color: red; font-weight: 400;font-family: Arial, Helvetica, sans-serif;">
+                            Total:
+                            <span><i class="fas fa-dollar-sign"></i> {{total}}</span></p>
+                        </div>
+                    </div>
+                </div>      
+            </div>
+        <div class="card-footer bg-black"></div>
+    </div>       
+    <button onclick="generatePDF()" class="btn btn-danger">Generate PDF</button>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script>
+    <script>
+        function generatePDF() {
+          var content = document.getElementById("content").innerHTML;
+          var pdf = new jsPDF();
+          pdf.fromHTML(content);
+          pdf.save("document.pdf");
+        }
+        </script>
+</body>
+</html>

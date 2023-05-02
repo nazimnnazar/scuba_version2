@@ -18,4 +18,5 @@ urlpatterns = [
     path('todo/<int:todo_id>/', views.todo, name='todo'),
     # path('adminpermit/<int:team_id>/',views.adminpermit,name='adminpermit'),
     path('invoice',views.invoice,name='invoice'),
+    path('pdf_invoice',views.pdf_invoice,name='pdf_invoice')
     ]

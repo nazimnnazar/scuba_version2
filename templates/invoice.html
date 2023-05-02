@@ -6,7 +6,8 @@
     <div class="card">
         <div class="card-body">
             <h5 class="card-title">Generate Bill</h5>
-            <form action="">
+            <form action="{% url 'pdf_invoice' %}" method="POST">
+                {% csrf_token %}
                 <div class="row mb-3">
                     <label for="inputText" class="col-sm-2 col-form-label">Name</label>
                     <div class="col-sm-10">
@@ -16,7 +17,13 @@
                 <div class="row mb-3">
                     <label for="inputText" class="col-sm-2 col-form-label">Contact Number</label>
                     <div class="col-sm-10">
-                        <input type="tel" id="contact" name="contact" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" class="form-control">
+                        <input type="tel" id="contact" name="contact" class="form-control">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="inputText" class="col-sm-2 col-form-label">Number of guests</label>
+                    <div class="col-sm-10">
+                        <input type="number" id="numberofguest" name="numberofguest" min="1" max="15" class="form-control">
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -38,116 +45,28 @@
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <label for="inputText" class="col-sm-2 col-form-label">Payment</label>
+                    <label for="inputDate" class="col-sm-2 col-form-label">Today</label>
                     <div class="col-sm-10">
-                        <input type="number" id="payment" name="payment" min="0" class="form-control">
+                        <input type="date" id="today" name="today" class="form-control">
                     </div>
                 </div>
-                <button type="button" onclick="generateReservation()" class="btn btn-danger">Generate </button>
+                <div class="row mb-3">
+                    <label for="inputText" class="col-sm-2 col-form-label">Prepayment</label>
+                    <div class="col-sm-10">
+                        <input type="number" id="prepayment" name="prepayment" min="0" class="form-control">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="inputText" class="col-sm-2 col-form-label">Total cost</label>
+                    <div class="col-sm-10">
+                        <input type="number" id="tota" name="total" min="0" class="form-control">
+                    </div>
+                </div>
+                <button type="submit"  class="btn btn-danger">Generate </button>
             </form>
         </div>
     </div>
-      <script src="script.js"></script>
-      <!-- <script> 
-        function generateReservation() {
-        var name = document.getElementById("name").value;
-        var contact = document.getElementById("contact").value;
-        var rooms = document.getElementById("rooms").value;
-        var checkin = document.getElementById("checkin").value;
-        var checkout = document.getElementById("checkout").value;
-        var payment = document.getElementById("payment").value;
-
-        if (!name || !contact || !rooms || !checkin || !checkout || !payment) {
-            alert("Please fill out all fields.");
-            return;
-        }
-        var canvas = document.createElement("canvas");
-        canvas.width = 800;
-        canvas.height = 600;
-        var ctx = canvas.getContext("2d");
-        var logoImg = new Image();
-        logoImg.src = "{% static 'img/navlogo.jpg' %}";
-        logoImg.onload = function() {
-            ctx.drawImage(logoImg, 20, 20, 150, 80);
-            ctx.font = "30px Arial";
-            ctx.fillText("Reservation Bill", 400, 50);
-            ctx.font = "20px Arial";
-            ctx.fillText("Name: " + name, 50, 150);
-            ctx.fillText("Contact Number: " + contact, 50, 200);
-            ctx.fillText("Number of Rooms: " + rooms, 50, 250);
-            ctx.fillText("Arrival: " + checkin, 50, 300);
-            ctx.fillText("Departure: " + checkout, 50, 350);
-            ctx.fillText("Payment: $" + payment, 50, 400);
-            var dataURL = canvas.toDataURL("image/jpeg", 1.0); // Use JPEG format with 100% quality
-            var img = document.createElement("img");
-            img.src = dataURL;
-            var div = document.createElement("div");
-            div.appendChild(img);
-            var downloadBtn = document.createElement("a");
-            downloadBtn.href = dataURL;
-            downloadBtn.download = "reservation_bill.jpg";
-            downloadBtn.innerHTML = "Download Bill";
-            div.appendChild(downloadBtn);
-
-            document.body.appendChild(div);
-        }
-        }
-    </script> -->
-    <script src="https://cdn.tiny.cloud/1/{your-api-key}/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-<script> 
-  tinymce.init({
-    selector: 'textarea',
-    plugins: 'image link',
-    toolbar: 'undo redo | bold italic | image link',
-  });
-
-  function generateReservation() {
-    var name = document.getElementById("name").value;
-    var contact = document.getElementById("contact").value;
-    var rooms = document.getElementById("rooms").value;
-    var checkin = document.getElementById("checkin").value;
-    var checkout = document.getElementById("checkout").value;
-    var payment = document.getElementById("payment").value;
-
-    if (!name || !contact || !rooms || !checkin || !checkout || !payment) {
-      alert("Please fill out all fields.");
-      return;
-    }
-
-    var canvas = document.createElement("canvas");
-    canvas.width = 800;
-    canvas.height = 600;
-    var ctx = canvas.getContext("2d");
-    var logoImg = new Image();
-    logoImg.src = "{% static 'img/navlogo.jpg' %}";
-    logoImg.onload = function() {
-      ctx.drawImage(logoImg, 20, 20, 150, 80);
-      ctx.font = "30px Arial";
-      ctx.fillText("Reservation Bill", 400, 50);
-      ctx.font = "20px Arial";
-      ctx.fillText("Name: " + name, 50, 150);
-      ctx.fillText("Contact Number: " + contact, 50, 200);
-      ctx.fillText("Number of Rooms: " + rooms, 50, 250);
-      ctx.fillText("Arrival: " + checkin, 50, 300);
-      ctx.fillText("Departure: " + checkout, 50, 350);
-      ctx.fillText("Payment: $" + payment, 50, 400);
-      var dataURL = canvas.toDataURL("image/jpeg", 1.0); // Use JPEG format with 100% quality
-      var img = document.createElement("img");
-      img.src = dataURL;
-      var div = document.createElement("div");
-      div.appendChild(img);
-      var downloadBtn = document.createElement("a");
-      downloadBtn.href = dataURL;
-      downloadBtn.download = "reservation_bill.jpg";
-      downloadBtn.innerHTML = "Download Bill";
-      div.appendChild(downloadBtn);
-
-      document.body.appendChild(div);
-    }
-  }
-</script>
-
-</main>
+</main> 
 {% endblock %}
 // function generateReservation() {
     //   var name = document.getElementById("name").value;

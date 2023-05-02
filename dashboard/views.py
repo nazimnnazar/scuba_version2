@@ -219,3 +219,29 @@ def todo(request,todo_id):
 def invoice(request):
     return render(request,'invoice.html')
 # ------------------------------END----------------------------
+
+def pdf_invoice(request):
+    if request.method == 'POST':
+        name = request.POST['name']
+        contact = request.POST['contact']
+        numberofguest = request.POST['numberofguest']
+        rooms = request.POST['rooms']
+        checkin = request.POST['checkin']
+        checkout = request.POST['checkout']
+        today = request.POST['today']
+        prepayment = request.POST['prepayment']
+        total = request.POST['total']
+        context = {
+            'name':name,
+            'contact':contact,
+            'numberofguest':numberofguest,
+            'rooms':rooms,
+            'checkin':checkin,
+            'checkout':checkout,
+            'prepayment':prepayment,
+            'today':today,
+            'prepayment':prepayment,
+            'total':total,
+        }
+        return render(request,'pdf_invoice.html',context)
+    return render(request,'invoice.html')
