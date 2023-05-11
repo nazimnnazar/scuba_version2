@@ -216,7 +216,12 @@
                             <br>
                             <form method="POST" action="{% url 'input_balance_agatti' balance_id=team.id %}">
                                 {% csrf_token %}
-                                <p> <strong>Package rate add</strong> </p>
+                                <p> <strong>Advance</strong> </p>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text"><i class="bi bi-currency-rupee"></i></span>
+                                    <input type="number" id="advanced" name="advanced" value="{{ team.advanced }}">      
+                                </div>
+                                <p> <strong>Balance</strong> </p>
                                 <div class="input-group mb-3">
                                     <span class="input-group-text"><i class="bi bi-currency-rupee"></i></span>
                                     <input type="number" id="balance" name="balance" value="{{ team.balance }}">      
@@ -502,7 +507,7 @@ function toggleBox(boxNum) {
 }
 .paymentbox{
     position: absolute;
-    top: 240px;
+    top: 280px;
     left: 465px;
     max-width: 300px;
     margin: 0 auto;

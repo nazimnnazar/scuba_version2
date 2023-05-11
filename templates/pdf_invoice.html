@@ -1,3 +1,4 @@
+{% load static %}
 <!doctype html>
 <html lang="en">
   <head>
@@ -7,6 +8,7 @@
     <title>INVOICE</title>
   </head>
   <body>
+    
     <div id="content">
         <div class="card">
             <div class="card-header bg-black"></div>
@@ -20,10 +22,14 @@
                     <div class="row">
                         <div class="col">
                             <ul class="list-unstyled float-end">
-                            <li style="font-size: 30px; color: rgb(0, 174, 255);">Lakshadweep Scuba Adventures Pvt Ltd</li>
-                            <li>9497766224</li>
-                            <li>lakscuba@gmail.com</li>
+                                <li>Lakshadweep Scuba Adventures Pvt Ltd</li>
+                                <li>A PADI 5 STAR Dive Resort No-27686</li>
+                                <li>Beach Road, Near Mohldheen Palli</li>
+                                <li>Kavaratti island,UT of Lakshadweep -682555</li>
                             </ul>
+                        </div>
+                        <div class="col">
+                           
                         </div>
                     </div>
                     <div class="row mx-3">
@@ -53,11 +59,11 @@
                                 </tr>
                                 <tr>
                                     <td>Arrival:</td>
-                                    <td><i class="fas fa-dollar-sign"></i> {{checkin}}</td>
+                                    <td><i class="fas fa-dollar-sign"></i> {{ checkin }}</td>
                                 </tr>
                                 <tr>
                                     <td>Departure:</td>
-                                    <td><i class="fas fa-dollar-sign"></i> {{checkout}}</td>
+                                    <td><i class="fas fa-dollar-sign"></i> {{ checkout }}</td>
                                 </tr>
                                 <tr>
                                     <td>Prepayment:</td>
@@ -68,8 +74,7 @@
                     </div>  
                     <div class="row">
                         <div class="col">
-                            <p >Date: <span class="text-muted">{{today}}</span></p>
-                            <p class="fw-bold mt-3">Signature:</p>
+                            <p >Date: <span class="text-muted">{{today }}</span></p>
                         </div>
                         <div class="col" style="margin-left:60px">
                             <p class="float-end"
@@ -80,7 +85,9 @@
                     </div>
                 </div>      
             </div>
+        </div>
         <div class="card-footer bg-black"></div>
+        
     </div>       
     <button onclick="generatePDF()" class="btn btn-danger">Generate PDF</button>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

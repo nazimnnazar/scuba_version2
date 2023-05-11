@@ -108,6 +108,7 @@ def input_balance_agatti(request,balance_id):
     team = get_object_or_404(Team,pk=balance_id)
     if request.method == 'POST':
         team.balance = request.POST['balance']
+        team.advanced = request.POST['advanced']
         team.save()
     return render(request, 'applicantprofileisland.html', {'team': team})
 def todo_agatti(request,todo_id):
@@ -198,6 +199,7 @@ def input_balance_kadmat(request,balance_id):
     team = get_object_or_404(Team,pk=balance_id)
     if request.method == 'POST':
         team.balance = request.POST['balance']
+        team.advanced = request.POST['advanced']
         team.save()
     return render(request, 'applicantprofilekadmat.html',{'team': team})
 
@@ -291,6 +293,7 @@ def input_balance_minicoy(request,balance_id):
     team = get_object_or_404(Team,pk=balance_id)
     if request.method == 'POST':
         team.balance = request.POST['balance']
+        team.advanced = request.POST['advanced']
         team.save()
     return render(request, 'applicantprofile_minicoy.html',{'team': team})
 
@@ -386,6 +389,7 @@ def input_balance_kalpeni(request,balance_id):
     team = get_object_or_404(Team,pk=balance_id)
     if request.method == 'POST':
         team.balance = request.POST['balance']
+        team.advanced = request.POST['advanced']
         team.save()
     return render(request,'applicantprofile_kalpeni.html',{'team':team})
 

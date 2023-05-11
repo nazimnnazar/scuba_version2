@@ -205,6 +205,7 @@ def input_balance(request,balance_id):
     team = get_object_or_404(Team,pk=balance_id)
     if request.method == 'POST':
         team.balance = request.POST['balance']
+        team.advanced = request.POST['advanced']
         team.save()
     return render(request, 'applicantprofile.html',{'team': team})
 
@@ -221,27 +222,35 @@ def invoice(request):
 # ------------------------------END----------------------------
 
 def pdf_invoice(request):
+    checkin_str = ''
+    checkout_str = ''
+    today_str = ''
+
     if request.method == 'POST':
         name = request.POST['name']
         contact = request.POST['contact']
         numberofguest = request.POST['numberofguest']
         rooms = request.POST['rooms']
-        checkin = request.POST['checkin']
-        checkout = request.POST['checkout']
-        today = request.POST['today']
+        checkin_str = request.POST['checkin']
+        checkout_str = request.POST['checkout']
+        today_str = request.POST['today']
         prepayment = request.POST['prepayment']
         total = request.POST['total']
-        context = {
-            'name':name,
-            'contact':contact,
-            'numberofguest':numberofguest,
-            'rooms':rooms,
-            'checkin':checkin,
-            'checkout':checkout,
-            'prepayment':prepayment,
-            'today':today,
-            'prepayment':prepayment,
-            'total':total,
-        }
-        return render(request,'pdf_invoice.html',context)
-    return render(request,'invoice.html')
+
+    checkin = datetime.strptime(checkin_str, '%Y-%m-%d').strftime('%d-%m-%Y')
+    checkout = datetime.strptime(checkout_str, '%Y-%m-%d').strftime('%d-%m-%Y')
+    today = datetime.strptime(today_str, '%Y-%m-%d').strftime('%d-%m-%Y')
+
+    context = {
+        'name':name,
+        'contact':contact,
+        'numberofguest':numberofguest,
+        'rooms':rooms,
+        'checkin':checkin,
+        'checkout':checkout,
+        'prepayment':prepayment,
+        'today':today,
+        'prepayment':prepayment,
+        'total':total,
+    }
+    return render(request,'pdf_invoice.html',context) if request.method == 'POST' else render(request,'invoice.html')
