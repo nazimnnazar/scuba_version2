@@ -1,5 +1,10 @@
 from django.db import models
 
+class HotelManage(models.Model):
+    hotelname = models.CharField(max_length=100)
+    def __str__(self):
+        return '{}'.format(self.hotelname)
+    
 class Team(models.Model):
     ROOM_CHOICES = (
         ('1', '1'),
@@ -25,7 +30,7 @@ class Team(models.Model):
         ('Advanced Open Water Diver','Advanced Open Water Diver'),
         ('EFR Primary & Secondary Care','EFR Primary & Secondary Care'),
         ('Rescue Diver','Rescue Diver'),
-        ('Dive Master','Dive Master'),
+        ('Divemaster','Divemaster'),
         ('Deep Diver','Deep Diver'),
         ('Digital Underwater Photography','Digital Underwater Photography'),
         ('Enriched Air Diver','Enriched Air Diver'),
@@ -42,7 +47,7 @@ class Team(models.Model):
         ('Open Water Dive Course Package','Open Water Dive Course Package'),
         ('Advanced Open Water Diver Course Package','Advanced Open Water Diver Course Package'),
         ('Open & Advanced Open Water Diver Course','Open & Advanced Open Water Diver Course'),
-        ('Open Water To Dive Master','Open Water To Dive Master'),
+        ('Open Water To Divemaster','Open Water To Divemaster'),
         ('Explore Lakshadweep','Explore Lakshadweep'),
     )
     STATUS = (
@@ -60,24 +65,7 @@ class Team(models.Model):
         ('Expired','Expired'),
         ('Without permit','Without permit'),
     )
-    PROPERTY = (
-        ('Alma S','Alma S'),
-        ('Royal Arabia','Royal Arabia'),
-        ('Capital inn','Capital inn'),
-        ('AL-BE','AL-BE'),
-        ('Bismillah','Bismillah'),
-        ('Sea Shell','Sea Shell'),
-        ('White Peril','White Peril'),
-        ('Popular','Popular'),
-        ('Palalam ','Palalam '),
-        ('Thangal S ','Thangal S'),
-        ('Lakscub KVT','Lakscub KVT'),
-        ('Lakscuba KVT','Lakscuba KVT'),
-        ('Mana','Mana'),
-        ('R Resort','R Resort'),
-        ('Gol Resort','Gol Resort'),
-        ('Agatti Resort','Agatti Resort'),
-    )
+
     ADMIN_ROOM_CHOICES =(
         ('1', '1'),
         ('2', '2'),
@@ -114,8 +102,9 @@ class Team(models.Model):
     permit = models.CharField(max_length=100,choices=PERMIT)
     admin_checkin = models.DateField(blank=True,null=True)
     admin_checkout = models.DateField(blank=True,null=True)
-    room_name = models.CharField(max_length=200,choices=PROPERTY)
+    room_name = models.ForeignKey(HotelManage, on_delete=models.CASCADE,null=True)
     admin_number_of_rooms = models.CharField(max_length=10, choices=ADMIN_ROOM_CHOICES)
+    packagerate = models.DecimalField(max_digits=1000000, decimal_places=2,null=True,default=None)
     advanced = models.DecimalField(max_digits=1000000, decimal_places=2,null=True,default=None)
     balance = models.DecimalField(max_digits=1000000, decimal_places=2,null=True,default=None)
     todo = models.CharField(max_length=500)
@@ -137,3 +126,4 @@ class TeamMember(models.Model):
     id_proof_again = models.FileField(upload_to='id_proofs/')    
     def __str__(self):
         return '{}'.format(self.name)
+    

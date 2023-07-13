@@ -29,8 +29,9 @@
                     <a class="btn btn-primary" href="#" role="button" onclick="toggleBox(3)"><i class="bi bi-chevron-bar-down"></i>Status</a>
                 </div>
                 <div class="payment_btn">
-                    <a class="btn btn-primary" href="#" role="button" onclick="toggleBox(4)"><i class="bi bi-currency-rupee"></i>Payment</a>
+                    <a class="btn btn-primary" href="#" role="button" data-toggle="modal" data-target="#exampleModalCenter" ><i class="bi bi-currency-rupee"></i>Payment</a>
                 </div>
+                <!-- onclick="toggleBox(4)" -->
                 <div class="command-box">
                     <div class="detailBox">
                         <form method="POST" action="{% url 'todo' todo_id=team.id %}">
@@ -76,12 +77,21 @@
                             </div>
                         </div>
                     </div>
+                    <form method="post">
+                        <!-- {% csrf_token %}
+                        <label for="room_name">Room Name:</label>
+                        <select name="room_name" id="room_name">
+                            
+                        </select>
+                        <button type="submit">Save</button>
+                    </form> -->
+                    
                     <!-- -----------------------------End Permit----------------------  -->
                     <!-- -----------------------------Room----------------------------- -->
                     <div class="box" id="box2">
                         <div class="room">
                             <div class="position">
-                                <form method="POST" action="{% url 'team_edit' team.id %}">
+                                <form method="POST" action="{% url 'leader_member' team.id %}">
                                     {% csrf_token %}
                                     <div class="row mb-3">
                                         <div class="col-sm-5">
@@ -96,9 +106,10 @@
                                     <div class="row mb-3">
                                         <label for="room_name" class="col-sm-2 col-form-label">Room</label>
                                         <div class="col-sm-6">
-                                            <select class="form-select" name="room_name">
-                                                {% for choice in team.PROPERTY %}
-                                                    <option value="{{ choice.0 }}" {% if choice.0 == team.room_name %}selected{% endif %} >{{ choice.1 }}</option>
+                                         
+                                            <select class="form-select" name="room_name"> 
+                                                {% for hotel in hotels %}
+                                                <option value="{{ hotel.id }}" {% if team.room_name_id == hotel.id %}selected{% endif %}>{{ hotel.hotelname }}</option>
                                                 {% endfor %}
                                             </select>
                                         </div>
@@ -153,11 +164,55 @@
                     </div>
                     <!-- -----------------------------End Status----------------------- -->
                     <!-- -----------------------------Payment-------------------------  -->
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Payment</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form method="POST" action="{% url 'input_balance' balance_id=team.id %}">
+                                        {% csrf_token %}
+                                        <p> <strong>Package Rate</strong> </p>
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text"><i class="bi bi-currency-rupee"></i></span>
+                                            <input type="number" id="packagerate" name="packagerate" value="{{ team.packagerate }}">      
+                                        </div>
+                                        <p> <strong>Advance</strong> </p>
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text"><i class="bi bi-currency-rupee"></i></span>
+                                            <input type="number" id="advanced" name="advanced" value="{{ team.advanced }}">      
+                                        </div>
+                                        <p> <strong>Balance</strong> </p>
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text"><i class="bi bi-currency-rupee"></i></span>
+                                            <input type="number" id="balance" name="balance" value="{{ team.balance }}">      
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button  class="btn btn-primary" type="submit">Add Payment</button>
+                                        </div>
+
+                                    </form>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
                     <div class="box" id="box4">
                         <div class="paymentbox">
                             <br>
-                            <form method="POST" action="{% url 'input_balance' balance_id=team.id %}">
+                            <!-- <form method="POST" action="{% url 'input_balance' balance_id=team.id %}">
                                 {% csrf_token %}
+                                <p> <strong>Package Rate</strong> </p>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text"><i class="bi bi-currency-rupee"></i></span>
+                                    <input type="number" id="advanced" name="advanced" value="">      
+                                </div>
                                 <p> <strong>Advance</strong> </p>
                                 <div class="input-group mb-3">
                                     <span class="input-group-text"><i class="bi bi-currency-rupee"></i></span>
@@ -174,7 +229,7 @@
                                     <div class="col"><button class="btn btn-success" type="submit">Add</button></div>
                                     <div class="col"></div>
                                 </div>                            
-                            </form> 
+                            </form>  -->
                         </div>
                     </div>
                     <!-- -----------------------------End Payment---------------------- -->        
@@ -451,7 +506,7 @@ function toggleBox(boxNum) {
 }
 .paymentbox{
     position: absolute;
-    top: 280px;
+    top: 310px;
     left: 465px;
     max-width: 300px;
     margin: 0 auto;

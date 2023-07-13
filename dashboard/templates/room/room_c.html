@@ -1,0 +1,51 @@
+{% extends 'adminbase.html' %}
+{% load static  %}
+{% block title %} DashBoard {% endblock %}
+{% block content %}
+
+<main id="main" class="main">
+
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Add Hotel Name</h5>
+                <center>
+                    <form method="post" class="needs-validation" novalidate >
+                        {% csrf_token %}
+                        <div class="form-row">
+                            <label for="validationCustom01">Hotel Name</label>
+                            <input name="hotelname" type="text" class="form-control" id="validationCustom01" placeholder="Hotel Name"  required style="width: 500px; height: 40px; font-size: 14px;" required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                        <br><br><br>
+                        <button class="btn btn-primary" type="submit">Add Hotel</button>
+                    </form>    
+                </center>            
+            </div>
+        </div>
+    </div>
+
+    <!-- ====================JS VALIDATION====================-->
+    <script>
+        (function() {
+            'use strict';
+            window.addEventListener('load', function() {
+                var forms = document.getElementsByClassName('needs-validation');
+                var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+                });
+            }, false);
+        })();
+    </script>   
+    <!--====================ENDVALIDATION====================-->
+
+</main>
+{% endblock %}

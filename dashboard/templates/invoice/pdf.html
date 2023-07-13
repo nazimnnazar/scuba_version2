@@ -1,0 +1,254 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Invoice</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="pdf.css" />
+    <link href="{% static 'img/navlogo.jpg' %}" rel="icon">
+    <script src="pdf.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
+
+</head>
+
+<body>
+    <div class="container d-flex justify-content-center mt-50 mb-50">
+        <div class="row">
+            <div class="col-md-12 text-right mb-3">
+                <button class="btn btn-primary" id="download"> download pdf</button>
+            </div>
+            <div class="col-md-12">
+                <div class="card" id="invoice">
+                    <div class="card-header bg-transparent header-elements-inline">
+                        <h6 class="card-title text-primary">Lakshadweep Scuba Adventures Pvt Ltd</h6>
+                        <div class="navbar-logo">
+                            <img src="{% static 'img/scubalogov.png' %}" style="width: 80px; height:80px;">
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="mb-4 pull-left">
+                                    <ul class="list list-unstyled mb-0 text-left">
+                                        <li>A PADI 5 STAR Dive Resort No-27686</li>
+                                        <li>Kavaratti island,UT of Lakshadweep -682555</li>
+                                        <li>Contact No-9497766224,9497766338</li>
+                                        <li>lakscuba@gmail.com</li>
+                                        <li>www.lakshadweepscubadive.com</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="mb-4 ">
+                                    <div class="text-sm-right">
+                                        <h4 class="invoice-color mb-2 mt-md-2">RECEIPT #BBB1243</h4>
+                                        <ul class="list list-unstyled mb-0">
+                                            <li>Date: <span class="font-weight-semibold"><strong>{{invoice_download.today_date|date:"d/m/y"}}</strong></span></li>
+                                            <li> <span class="font-weight-semibold"></span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-md-flex flex-md-wrap">
+                            <div class="mb-4 mb-md-2 text-left"> <span class="text-muted">Invoice To:</span>
+                                <ul class="list list-unstyled mb-0">
+                                    <li>
+                                        <h5 class="my-2">{{invoice_download.name}}</h5>
+                                    </li>
+                                    <li>{{invoice_download.phone}}</li>
+                                    <li><a href="#" data-abc="true">{{invoice_download.email}}</a></li>
+                                </ul>
+                            </div>
+
+                            <div class="mb-2 ml-auto"> <span class="text-muted">Tour Days:</span>
+                                <div class="d-flex flex-wrap wmin-md-400">
+                                    <ul class="list list-unstyled text-right mb-0 ml-auto">
+                                        <li>Arrival date: <span class="font-weight-semibold"><strong>{{invoice_download.arrival_date|date:"d/m/y"}}</strong></span></li>
+                                        <li>Departure date: <span class="font-weight-semibold"><strong>{{invoice_download.departure_date|date:"d/m/y"}}</strong></span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div> 
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-lg">
+                            <thead>
+                                <tr>
+                                    <th>Description</th>
+                                    <th>Rate</th>
+                                    <th>Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <h6 class="mb-0">{{invoice_download.package}}</h6>                                        
+                                    </td>
+                                    <td></td>
+                                    <td>{{invoice_download.package_rate}}</td>
+                                </tr>
+                              
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-md-flex flex-md-wrap">
+                            <div class="pt-2 mb-3 wmin-md-400 ml-auto">
+                                <h6 class="mb-3 text-left">Total due</h6>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th class="text-left">Prepayment:</th>
+                                                <td class="text-right">{{invoice_download.prepayment}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="text-left">Total:</th>
+                                                <td class="text-right text-primary">
+                                                    <h5 class="font-weight-semibold">{{invoice_download.total}}</h5>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer"> 
+                        <span class="text-muted">
+                            This is computer generated receipt.Not needed any seal or signature.Kindly crosscheck all details carefully.No refund will be provided
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<style>
+    body {
+    margin: 0;
+    font-family: Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: .8125rem;
+    font-weight: 400;
+    line-height: 1.5385;
+    color: #333;
+    text-align: left;
+    background-color: #eee
+}
+
+.mt-50 {
+    margin-top: 50px
+}
+
+.mb-50 {
+    margin-bottom: 50px
+}
+
+.card {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, .125);
+    border-radius: .1875rem
+}
+
+.card-img-actions {
+    position: relative
+}
+
+.card-body {
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 1.25rem;
+    text-align: center
+}
+
+.card-title {
+    margin-top: 10px;
+    font-size: 17px
+}
+
+.invoice-color {
+    color: red !important
+}
+
+.card-header {
+    padding: .9375rem 1.25rem;
+    margin-bottom: 0;
+    background-color: rgba(0, 0, 0, .02);
+    border-bottom: 1px solid rgba(0, 0, 0, .125)
+}
+
+a {
+    text-decoration: none !important
+}
+
+.btn-light {
+    color: #333;
+    background-color: #fafafa;
+    border-color: #ddd
+}
+
+.header-elements-inline {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap
+}
+
+@media (min-width: 768px) {
+    .wmin-md-400 {
+        min-width: 400px !important
+    }
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #2196f3
+}
+
+.btn-labeled>b {
+    position: absolute;
+    top: -1px;
+    background-color: blue;
+    display: block;
+    line-height: 1;
+    padding: .62503rem
+}
+</style>
+<script>
+    window.onload = function () {
+    document.getElementById("download")
+        .addEventListener("click", () => {
+            const invoice = this.document.getElementById("invoice");
+            console.log(invoice);
+            console.log(window);
+            var opt = {
+                margin: 1,
+                filename: 'receipt.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+            html2pdf().from(invoice).set(opt).save();
+        })
+}
+</script>
+
+</html>
